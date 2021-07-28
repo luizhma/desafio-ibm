@@ -2,6 +2,7 @@ package com.api.desafio.livros.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -9,6 +10,7 @@ import java.io.Serializable;
 @Entity
 @Data
 @NoArgsConstructor
+@Accessors(chain = true)
 public class Livro implements Serializable {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Id
@@ -17,7 +19,7 @@ public class Livro implements Serializable {
     private String nome;
     private String descricao;
     private Integer estoque;
-    private Integer classificacao;
+    private Double classificacao;
 
     /*
     @ManyToOne

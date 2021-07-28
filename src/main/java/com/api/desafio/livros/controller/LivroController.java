@@ -1,6 +1,7 @@
 package com.api.desafio.livros.controller;
 
 import com.api.desafio.livros.model.Livro;
+import com.api.desafio.livros.dto.requestDto.LivroRequestDto;
 import com.api.desafio.livros.service.LivroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,18 +25,18 @@ public class LivroController {
         return livroService.getLivro(id);
     }
 
-    @PostMapping("/livro/{id}")
-    public void saveLivro(@RequestBody Livro livro){
-        livroService.saveLivro(livro);
+    @PostMapping("/livro")
+    public void saveLivro(@RequestBody LivroRequestDto livroRequestDto){
+        livroService.saveLivro(livroRequestDto);
     }
 
-    @PutMapping("/livro/{id}")
-    public Livro putLivro(@RequestBody Livro livro, @PathVariable Long id){
-        return putLivro(livro, id);
+    @PutMapping("/livro")
+    public Livro putLivro(@RequestBody Livro livro){
+        return livroService.putLivro(livro);
     }
 
     @DeleteMapping("/livro/{id}")
-    public void deleteLivro(Long id){
+    public void deleteLivro(@PathVariable Long id){
         livroService.deleteLivro(id);
     }
 
