@@ -1,7 +1,7 @@
 package com.api.desafio.livros.controller.exception;
 
-import com.api.desafio.livros.services.exceptions.DataIntegrityException;
-import com.api.desafio.livros.services.exceptions.ObjectNotFoundException;
+import com.api.desafio.livros.service.exceptions.DataIntegrityException;
+import com.api.desafio.livros.service.exceptions.ObjectNotFoundException;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

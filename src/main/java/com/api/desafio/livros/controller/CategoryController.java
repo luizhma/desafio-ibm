@@ -3,7 +3,7 @@ package com.api.desafio.livros.controller;
 import com.api.desafio.livros.DTO.CategoryDTO;
 import com.api.desafio.livros.mapper.CategoryMapper;
 import com.api.desafio.livros.model.Category;
-import com.api.desafio.livros.services.CategoryService;
+import com.api.desafio.livros.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

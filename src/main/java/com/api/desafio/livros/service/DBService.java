@@ -1,5 +1,4 @@
-/*
-package com.api.desafio.livros.services;
+package com.api.desafio.livros.service;
 
 import com.api.desafio.livros.model.Category;
 import com.api.desafio.livros.repository.CategoryRepository;
@@ -27,4 +26,3 @@ public class DBService {
     }
 
 }
-*/

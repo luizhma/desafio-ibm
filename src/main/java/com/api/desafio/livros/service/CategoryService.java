@@ -1,8 +1,8 @@
-package com.api.desafio.livros.services;
+package com.api.desafio.livros.service;
 
 import com.api.desafio.livros.model.Category;
 import com.api.desafio.livros.repository.CategoryRepository;
-import com.api.desafio.livros.services.exceptions.ObjectNotFoundException;
+import com.api.desafio.livros.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
