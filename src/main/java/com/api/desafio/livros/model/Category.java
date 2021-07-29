@@ -1,14 +1,21 @@
 package com.api.desafio.livros.model;
 
+
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 
 @Data
+@Builder
 @Entity
 @Table(name = "tb_category")
 @NoArgsConstructor
@@ -19,9 +26,6 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_category")
     private Long id;
-    @NotEmpty(message = "Campo NOME é requerido")
-    @Length(min = 3, max = 100 , message = "O campo NOME deve ter entre 3 e 100 caracteres")
-    @Column(name = "st_name", nullable = false)
     private String name;
 
 }
