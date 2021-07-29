@@ -1,13 +1,11 @@
 package com.api.desafio.livros.service;
 
 import com.api.desafio.livros.model.Livro;
-import com.api.desafio.livros.dto.requestDto.LivroRequestDto;
 import com.api.desafio.livros.repository.LivroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class LivroService {
@@ -19,12 +17,12 @@ public class LivroService {
        return livroRepository.findAll();
     }
 
-    public Optional<Livro> getLivro(Long id){
+    public Livro getLivro(Long id){
         return livroRepository.findById(id);
     }
 
-    public void saveLivro(LivroRequestDto livroRequestDto){
-        livroRepository.save(livroRequestDto.buildLivro());
+    public void saveLivro(Livro livro){
+        livroRepository.save(livro);
     }
 
     public Livro putLivro(Livro livro){
