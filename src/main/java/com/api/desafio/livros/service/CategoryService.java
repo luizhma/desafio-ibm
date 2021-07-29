@@ -2,8 +2,10 @@ package com.api.desafio.livros.service;
 
 import com.api.desafio.livros.model.Category;
 import com.api.desafio.livros.repository.CategoryRepository;
+import com.api.desafio.livros.service.exceptions.DataIntegrityException;
 import com.api.desafio.livros.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -30,7 +32,7 @@ public class CategoryService {
     }
 
     @Transactional
-    public Category insert(Category obj) {
+    public Category save(Category obj) {
         if (Objects.isNull(obj.getId()))
             return categoryRepository.save(obj);
         boolean exists = categoryRepository.existsById(obj.getId());
@@ -39,11 +41,11 @@ public class CategoryService {
         return obj;
     }
 
-    public List<Category> listAll(){
+    public List<Category> listAll() {
         return categoryRepository.findAll();
     }
 
-/*    @Transactional
+    @Transactional
     public Category update(Category obj) {
         findById(obj.getId());
         return categoryRepository.save(obj);
@@ -60,8 +62,4 @@ public class CategoryService {
 
     }
 
-    public Page<Category> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
-        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
-        return categoryRepository.findAll(pageRequest);
-    }*/
 }
