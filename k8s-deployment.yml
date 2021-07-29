@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: livros-api
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+      - name: livros-api
+        image: jairrillo/livros-api:0.0.1-SNAPSHOT
+        imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: livros-api-entrypoint
+  namespace: default
+spec:
+  type: NodePort
+  selector:
+    app: api
+  ports:
+  - port: 8080
+    targetPort: 8080
+    nodePort: 30001
