@@ -1,24 +1,20 @@
 package com.api.desafio.livros.config;
 
-import com.api.desafio.livros.dto.requestDTO.LivroRequestDTO;
-import com.api.desafio.livros.dto.responseDTO.LivroResponseDTO;
+import com.api.desafio.livros.dto.LivroDTO;
 import com.api.desafio.livros.model.Livro;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
-import java.util.Optional;
 
-@Mapper
+@Mapper (componentModel = "spring")
 public interface LivroMapper {
 
     LivroMapper INSTANCE = Mappers.getMapper(LivroMapper.class);
 
-    LivroRequestDTO livroRequestDTOToLivro(Livro livro);
+    LivroDTO livroDTOToLivro(Livro livro);
 
-    Livro livroToLivroRequestDTO(LivroRequestDTO livroRequestDTO);
+    List<LivroDTO> livrosDTOToLivros(List<Livro> livro);
 
-    List<LivroRequestDTO> livrosRequestDTOToLivros(List<Livro> livros);
-
-    Livro livroToLivroResponseDTO(LivroResponseDTO livroResponseDTO);
+    Livro livroToDTO(LivroDTO livroDTO);
 }

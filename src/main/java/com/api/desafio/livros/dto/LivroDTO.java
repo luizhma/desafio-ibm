@@ -1,14 +1,13 @@
-package com.api.desafio.livros.dto.requestDTO;
+package com.api.desafio.livros.dto;
 
-import com.api.desafio.livros.model.Livro;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class LivroRequestDTO {
+@Data
+public class LivroDTO {
     private Long id;
     private String sbn;
     private String nome;
