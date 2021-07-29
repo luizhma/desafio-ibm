@@ -15,29 +15,33 @@ public class LivroController {
     @Autowired
     LivroService livroService;
 
+    @Autowired
+    LivroMapper livroMapper;
+
+
     @GetMapping("/livros")
     public List<LivroDTO> getLivros(){
-        return LivroMapper.INSTANCE.livrosDTOToLivros(livroService.getLivros());
+        return livroMapper.livrosDTOToLivros(livroService.getLivros());
     }
 
     @GetMapping("/livro/{id}")
     public LivroDTO getLivro(@PathVariable Long id){
-        return LivroMapper.INSTANCE.livroDTOToLivro(livroService.getLivro(id).get());
+        return livroMapper.livroDTOToLivro(livroService.getLivro(id).get());
     }
 
     @PostMapping("/livro")
     public Livro saveLivro(@RequestBody LivroDTO livroDTO){
-        return livroService.saveLivro(LivroMapper.INSTANCE.livroToDTO(livroDTO));
+        return livroService.saveLivro(livroMapper.livroToDTO(livroDTO));
     }
 
     @PutMapping("/livro")
     public Livro putLivro(@RequestBody LivroDTO livroDTO){
-        return livroService.putLivro(LivroMapper.INSTANCE.livroToDTO(livroDTO));
+        return livroService.putLivro(livroMapper.livroToDTO(livroDTO));
     }
 
     @DeleteMapping("/livro/{id}")
     public void deleteLivro(@PathVariable Long id){
-       LivroDTO livroDTO  = LivroMapper.INSTANCE.livroDTOToLivro(livroService.getLivro(id).get());
+       LivroDTO livroDTO  = livroMapper.livroDTOToLivro(livroService.getLivro(id).get());
        livroService.deleteLivro(livroDTO.getId());
     }
 
