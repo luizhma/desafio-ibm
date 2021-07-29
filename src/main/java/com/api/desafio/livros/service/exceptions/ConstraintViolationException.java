@@ -1,4 +1,4 @@
-package com.api.desafio.livros.services.exceptions;
+package com.api.desafio.livros.service.exceptions;
 
 public class ConstraintViolationException extends RuntimeException {
 
