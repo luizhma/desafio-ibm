@@ -14,7 +14,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -30,9 +29,15 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_category")
     private Long id;
+    @Column(name = "st_name")
     private String name;
 
+<<<<<<< HEAD
     @OneToMany(mappedBy = "category")
     private List<Book> books = new ArrayList<>();
+=======
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "category")
+    private List<Livro> livros;
+>>>>>>> ed793a4623b847e27e386c25bb2aca7755f3cfdd
 
 }
