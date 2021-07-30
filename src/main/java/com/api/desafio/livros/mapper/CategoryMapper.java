@@ -1,6 +1,6 @@
 package com.api.desafio.livros.mapper;
 
-import com.api.desafio.livros.DTO.CategoryDTO;
+import com.api.desafio.livros.dto.CategoryDTO;
 import com.api.desafio.livros.model.Category;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
