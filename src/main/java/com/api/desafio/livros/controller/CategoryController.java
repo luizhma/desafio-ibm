@@ -5,7 +5,6 @@ import com.api.desafio.livros.mapper.CategoryMapper;
 import com.api.desafio.livros.model.Category;
 import com.api.desafio.livros.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,26 +20,27 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/categories")
-
 public class CategoryController {
 
     @Autowired
     private CategoryService categoryService;
 
+    @Autowired
+    CategoryMapper categoryMapper;
+
     @GetMapping
-    public ResponseEntity<List<Category>> list(){
-        return new ResponseEntity<>(categoryService.listAll(), HttpStatus.OK);
+    public List<CategoryDTO> list(){
+        return categoryMapper.dtosToEntity(categoryService.listAll());
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Category> findById(@PathVariable Long id){
-        return new ResponseEntity<>(categoryService.findById(id), HttpStatus.OK);
+    public CategoryDTO findById(@PathVariable Long id){
+        return categoryMapper.dtoToEntity(categoryService.findById(id));
     }
 
     @PostMapping("/insert")
-    public CategoryDTO insert(@Valid @RequestBody CategoryDTO categoryDTO) {
-        return CategoryMapper.entityToDto(
-                categoryService.save(CategoryMapper.dtoToEntity(categoryDTO)));
+    public Category insert(@Valid @RequestBody CategoryDTO categoryDTO) {
+        return   categoryService.save(categoryMapper.entityToDto(categoryDTO));
     }
 
     @DeleteMapping(path = "/{id}")
@@ -50,8 +50,8 @@ public class CategoryController {
     }
 
     @PutMapping(path = "/update")
-    public ResponseEntity<Void> update(@Valid @RequestBody CategoryDTO categoryDTO){
-        categoryService.update(CategoryMapper.dtoToEntity(categoryDTO));
+    public ResponseEntity<Category> update(@Valid @RequestBody CategoryDTO categoryDTO){
+        categoryService.update(categoryMapper.entityToDto(categoryDTO));
         return ResponseEntity.noContent().build();
     }
 

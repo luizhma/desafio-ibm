@@ -2,9 +2,10 @@ package com.api.desafio.livros.service;
 
 import com.api.desafio.livros.model.Category;
 import com.api.desafio.livros.repository.CategoryRepository;
+import com.api.desafio.livros.repository.LivroRepository;
 import com.api.desafio.livros.service.exceptions.DataIntegrityException;
 import com.api.desafio.livros.service.exceptions.ObjectNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -12,33 +13,29 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class CategoryService {
 
-    @Autowired
-    private CategoryRepository categoryRepository;
+
+    private final CategoryRepository categoryRepository;
+    private final LivroRepository livroRepository;
 
     public Category findById(Long id) {
-        Optional<Category> obj = categoryRepository.findById(id);
-        if (obj.isEmpty()) {
+        Optional<Category> category = categoryRepository.findById(id);
+        if (!category.isPresent()){
             throw new ObjectNotFoundException(
                     "Objeto não encontrato! ID: " + id + ", Tipo: " + Category.class.getName());
         }
-
-        return obj.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Not found"));
+       return category.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Not Found"));
     }
 
+
     @Transactional
-    public Category save(Category obj) {
-        if (Objects.isNull(obj.getId()))
-            return categoryRepository.save(obj);
-        boolean exists = categoryRepository.existsById(obj.getId());
-        if (!exists)
-            return categoryRepository.save(obj);
-        return obj;
+    public Category save(Category category) {
+        return categoryRepository.save(category);
     }
 
     public List<Category> listAll() {
