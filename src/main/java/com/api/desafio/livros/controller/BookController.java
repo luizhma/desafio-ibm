@@ -5,12 +5,19 @@ import com.api.desafio.livros.mapper.BookMapper;
 import com.api.desafio.livros.model.Book;
 import com.api.desafio.livros.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping (value = "/books")
 public class BookController {
 
     @Autowired
@@ -19,31 +26,32 @@ public class BookController {
     @Autowired
     BookMapper bookMapper;
 
-
-    @GetMapping
+    @GetMapping ("/books")
     public List<BookDTO> list(){
         return bookMapper.livrosDTOToLivros(bookService.findAll());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/book/{id}")
     public BookDTO findById(@PathVariable Long id){
         return bookMapper.livroDTOToLivro(bookService.findById(id));
     }
 
-    @PostMapping("/insert")
-    public Book insert(@RequestBody BookDTO bookDTO){
+    @PostMapping("/book")
+    public Book insert(@Valid @RequestBody BookDTO bookDTO){
         return bookService.save(bookMapper.livroToDTO(bookDTO));
     }
 
-    @PutMapping("/update")
-    public Book update(@RequestBody BookDTO bookDTO){
-        return bookService.update(bookMapper.livroToDTO(bookDTO));
+    @PutMapping("/book")
+    public ResponseEntity<Book> update(@Valid @RequestBody BookDTO bookDTO){
+        bookService.update(bookMapper.livroToDTO(bookDTO));
+        return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id){
+    @DeleteMapping("/book/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
        BookDTO bookDTO = bookMapper.livroDTOToLivro(bookService.findById(id));
        bookService.delete(bookDTO.getId());
+       return ResponseEntity.noContent().build();
     }
 
 

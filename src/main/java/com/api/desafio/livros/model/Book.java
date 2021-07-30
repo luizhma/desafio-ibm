@@ -1,6 +1,7 @@
 package com.api.desafio.livros.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
@@ -15,6 +16,7 @@ import java.io.Serializable;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Table (name = "tb_book")
 @Accessors(chain = true)
 @Data
@@ -24,8 +26,7 @@ public class Book implements Serializable {
     private Long id;
     @NotEmpty (message = "Campo SBN é obrigatório!")
     private String sbn;
-    @NotEmpty (message = "Campo Nome é obrigatório!")
-    @Length (min = 3, max = 100 , message = "O NOME deve ter entre 3 e 100 caracteres")
+    @NotEmpty(message = "Campo NOME é requerido")
     private String nome;
     @Length (max = 150, message = "Max 150 caracteres")
     @NotEmpty (message = "Campo Descrição é obrigatório!")
