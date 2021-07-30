@@ -1,6 +1,6 @@
 package com.api.desafio.livros.controller;
 
-import com.api.desafio.livros.DTO.CategoryDTO;
+import com.api.desafio.livros.dto.CategoryDTO;
 import com.api.desafio.livros.mapper.CategoryMapper;
 import com.api.desafio.livros.model.Category;
 import com.api.desafio.livros.service.CategoryService;

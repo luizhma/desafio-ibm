@@ -2,7 +2,7 @@ package com.api.desafio.livros.controller;
 
 import com.api.desafio.livros.mapper.LivroMapper;
 import com.api.desafio.livros.model.Livro;
-import com.api.desafio.livros.DTO.LivroDTO;
+import com.api.desafio.livros.dto.LivroDTO;
 import com.api.desafio.livros.service.LivroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
