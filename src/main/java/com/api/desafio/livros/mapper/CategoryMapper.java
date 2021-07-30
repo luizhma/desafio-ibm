@@ -8,14 +8,14 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-public abstract class CategoryMapper {
+public interface CategoryMapper {
 
-   public static final CategoryMapper INSTANCE = Mappers.getMapper(CategoryMapper.class);
+    CategoryMapper INSTANCE = Mappers.getMapper(CategoryMapper.class);
 
-    public abstract CategoryDTO dtoToEntity(Category category);
+    CategoryDTO dtoToEntity(Category category);
 
-    public abstract List<CategoryDTO> dtosToEntity(List<Category> category);
+    List<CategoryDTO> dtosToEntity(List<Category> category);
 
-    public abstract Category entityToDto(CategoryDTO categoryDTO);
+    Category entityToDto(CategoryDTO categoryDTO);
 
 }
