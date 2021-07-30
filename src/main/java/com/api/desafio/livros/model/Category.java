@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -32,7 +33,8 @@ public class Category {
     @Column(name = "st_name")
     private String name;
 
+
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "category")
-    private List<Livro> livros;
+    private List<Book> books;
 
 }
