@@ -4,6 +4,12 @@ import com.api.desafio.livros.dto.BookDTO;
 import com.api.desafio.livros.mapper.BookMapper;
 import com.api.desafio.livros.model.Book;
 import com.api.desafio.livros.service.BookService;
+
+import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,6 +33,12 @@ public class BookController {
     BookMapper bookMapper;
 
     @GetMapping ("/books")
+    @ApiOperation(value = "Retorna uma lista de livros")
+    @ApiResponses(value = {
+    	    @ApiResponse(code = 200, message = "Retorna uma lista de livros"),
+    	    @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+    	    @ApiResponse(code = 500, message = "Foi gerada uma exceção de sistema"),
+    	})    
     public List<BookDTO> list(){
         return bookMapper.livrosDTOToLivros(bookService.findAll());
     }
@@ -37,8 +49,15 @@ public class BookController {
     }
 
     @PostMapping("/book")
-    public Book insert(@Valid @RequestBody BookDTO bookDTO){
-        return bookService.save(bookMapper.livroToDTO(bookDTO));
+    @ApiOperation(value = "Adiciona um livro")
+    @ApiResponses(value = {
+    	    @ApiResponse(code = 201, message = "Livro Cadastrado"),
+    	    @ApiResponse(code = 400, message = "Algum problema na requisição"),
+    	    @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+    	    @ApiResponse(code = 500, message = "Foi gerada uma exceção de sistema"),
+    	})        
+    public Book insert(@Valid @RequestBody BookDTO book){
+        return bookService.save(bookMapper.livroToDTO(book));
     }
 
     @PutMapping("/book")
