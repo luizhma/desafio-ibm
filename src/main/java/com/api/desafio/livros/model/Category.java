@@ -32,7 +32,7 @@ public class Category {
     private Long id;
     private String name;
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "category")
-    private List<Livro> livros = new ArrayList<>();
+    @OneToMany(mappedBy = "category")
+    private List<Book> books = new ArrayList<>();
 
 }

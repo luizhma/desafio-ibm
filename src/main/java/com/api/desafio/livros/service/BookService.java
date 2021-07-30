@@ -1,11 +1,11 @@
 package com.api.desafio.livros.service;
 
+import com.api.desafio.livros.model.Book;
 import com.api.desafio.livros.model.Category;
-import com.api.desafio.livros.repository.CategoryRepository;
 import com.api.desafio.livros.repository.BookRepository;
 import com.api.desafio.livros.service.exceptions.DataIntegrityException;
 import com.api.desafio.livros.service.exceptions.ObjectNotFoundException;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -16,47 +16,42 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
-public class CategoryService {
+public class BookService {
 
+    @Autowired
+    BookRepository bookRepository;
 
-    private final CategoryRepository categoryRepository;
-    private final BookRepository bookRepository;
+    public List<Book> findAll(){
+       return bookRepository.findAll();
+    }
 
-    public Category findById(Long id) {
-        Optional<Category> category = categoryRepository.findById(id);
-        if (!category.isPresent()){
+    public Book findById(Long id){
+        Optional<Book> book = bookRepository.findById(id);
+        if (!book.isPresent()){
             throw new ObjectNotFoundException(
                     "Objeto não encontrato! ID: " + id + ", Tipo: " + Category.class.getName());
         }
-       return category.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Not Found"));
-    }
-
-
-    @Transactional
-    public Category save(Category category) {
-        return categoryRepository.save(category);
-    }
-
-    public List<Category> listAll() {
-        return categoryRepository.findAll();
+        return book.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Not Found"));
     }
 
     @Transactional
-    public Category update(Category obj) {
-        findById(obj.getId());
-        return categoryRepository.save(obj);
+    public Book save(Book book){
+        bookRepository.save(book);
+        return book;
     }
 
-    @Transactional
-    public void delete(Long id) {
+    public Book update(Book book){
+        findById(book.getId());
+        return bookRepository.save(book);
+
+    }
+
+    public void delete(Long id){
         findById(id);
         try {
-            categoryRepository.deleteById(id);
+            bookRepository.deleteById(id);
         } catch (DataIntegrityViolationException e) {
             throw new DataIntegrityException("Exclusão não permitida, itens vinculados");
         }
-
     }
-
 }
