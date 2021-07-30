@@ -27,5 +27,11 @@ kubectl delete -f k8s-deployment.yml
 kubectl apply -f k8s-deployemnt.yml
 ```
 
+Atualizar Imagem
+
+```
+kubectl set image deployment/livros-api livros-api=docker.io/jairrillo/livros-api:0.0.1-SNAPSHOT
+```
+
 
 
