@@ -1,4 +1,4 @@
-package com.api.desafio.livros.dto;
+package com.api.desafio.livros.DTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -3,28 +3,19 @@ package com.api.desafio.livros.mapper;
 import com.api.desafio.livros.DTO.CategoryDTO;
 import com.api.desafio.livros.model.Category;
 import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 
-import java.util.Objects;
+import java.util.List;
 
-@Mapper( componentModel = "spring")
-public class CategoryMapper{
-    public static Category dtoToEntity(CategoryDTO categoryDTO) {
-        if (Objects.isNull(categoryDTO))
-            return new Category();
+@Mapper(componentModel = "spring")
+public abstract class CategoryMapper {
 
-        return Category.builder()
-                .id(categoryDTO.getId())
-                .name(categoryDTO.getName())
-                .build();
-    }
+   public static final CategoryMapper INSTANCE = Mappers.getMapper(CategoryMapper.class);
 
-    public static CategoryDTO entityToDto(Category entity){
-        if (Objects.isNull(entity))
-            return new CategoryDTO();
+    public abstract CategoryDTO dtoToEntity(Category category);
 
-            return CategoryDTO.builder()
-                    .id(entity.getId())
-                    .name(entity.getName())
-                    .build();
-    }
+    public abstract List<CategoryDTO> dtosToEntity(List<Category> category);
+
+    public abstract Category entityToDto(CategoryDTO categoryDTO);
+
 }
