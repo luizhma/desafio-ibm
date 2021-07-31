@@ -1,6 +1,7 @@
 package com.api.desafio.livros.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -38,6 +39,7 @@ public class Category implements Serializable {
     private String name;
 
     @OneToMany(mappedBy = "category")
+    @JsonIgnore
     private List<Book> books = new ArrayList<>();
 
 
