@@ -1,6 +1,6 @@
 package com.api.desafio.livros.controller;
 
-import com.api.desafio.livros.dto.BookDTO;
+import com.api.desafio.livros.dto.bookResponseDTO.BookResponseDTO;
 import com.api.desafio.livros.mapper.BookMapper;
 import com.api.desafio.livros.model.Book;
 import com.api.desafio.livros.service.BookService;
@@ -27,30 +27,30 @@ public class BookController {
     BookMapper bookMapper;
 
     @GetMapping ("/books")
-    public List<BookDTO> list(){
+    public List<BookResponseDTO> list(){
         return bookMapper.livrosDTOToLivros(bookService.findAll());
     }
 
     @GetMapping("/book/{id}")
-    public BookDTO findById(@PathVariable Long id){
+    public BookResponseDTO findById(@PathVariable Long id){
         return bookMapper.livroDTOToLivro(bookService.findById(id));
     }
 
     @PostMapping("/book")
-    public Book insert(@Valid @RequestBody BookDTO bookDTO){
-        return bookService.save(bookMapper.livroToDTO(bookDTO));
+    public Book insert(@Valid @RequestBody BookResponseDTO bookResponseDTO){
+        return bookService.save(bookMapper.livroToDTO(bookResponseDTO));
     }
 
     @PutMapping("/book")
-    public ResponseEntity<Book> update(@Valid @RequestBody BookDTO bookDTO){
-        bookService.update(bookMapper.livroToDTO(bookDTO));
+    public ResponseEntity<Book> update(@Valid @RequestBody BookResponseDTO bookResponseDTO){
+        bookService.update(bookMapper.livroToDTO(bookResponseDTO));
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/book/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
-       BookDTO bookDTO = bookMapper.livroDTOToLivro(bookService.findById(id));
-       bookService.delete(bookDTO.getId());
+       BookResponseDTO bookResponseDTO = bookMapper.livroDTOToLivro(bookService.findById(id));
+       bookService.delete(bookResponseDTO.getId());
        return ResponseEntity.noContent().build();
     }
 

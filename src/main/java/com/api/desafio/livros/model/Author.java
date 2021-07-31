@@ -39,9 +39,8 @@ public class Author {
 
     @Column(length = 60, nullable = false, unique = false)
     private String biography;
-
-
+    /*
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "author")
-    private List<Livro> livros;
-
+    private List<Book> books;
+*/
 }
