@@ -36,18 +36,13 @@ public class Book implements Serializable {
     @NotNull (message = "Campo Classificação é obrigatório!")
     private Double classificacao;
 
-    /*
-    @ManyToOne
-    private Autor autor;
-
-*/
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_category")
     private Category category;
-/*
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_author")
     private Author author;
- */
+
 }

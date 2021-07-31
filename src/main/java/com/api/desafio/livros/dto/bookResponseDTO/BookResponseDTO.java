@@ -1,5 +1,6 @@
 package com.api.desafio.livros.dto.bookResponseDTO;
 
+import com.api.desafio.livros.dto.AuthorDTO;
 import com.api.desafio.livros.dto.CategoryDTO;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
@@ -28,4 +29,5 @@ public class BookResponseDTO {
 	@ApiModelProperty(value = "Classificação do livro")
     private Double classificacao;
     private CategoryDTO category;
+    private AuthorDTO author;
 }
