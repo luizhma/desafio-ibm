@@ -33,8 +33,9 @@ public class Category {
     @Column(name = "st_name")
     private String name;
 
-
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "category")
     private List<Book> books;
+
+
 
 }

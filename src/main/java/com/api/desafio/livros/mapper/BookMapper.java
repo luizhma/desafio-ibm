@@ -1,8 +1,10 @@
 package com.api.desafio.livros.mapper;
 
-import com.api.desafio.livros.dto.BookDTO;
+import com.api.desafio.livros.dto.bookRequestDTO.BookRequestDTO;
+import com.api.desafio.livros.dto.bookResponseDTO.BookResponseDTO;
 import com.api.desafio.livros.model.Book;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
@@ -12,9 +14,15 @@ public interface BookMapper {
 
     BookMapper INSTANCE = Mappers.getMapper(BookMapper.class);
 
-    BookDTO livroDTOToLivro(Book book);
+    @Mapping(source = "category", target = "category")
+    BookResponseDTO livroDTOToLivro(Book book);
 
-    List<BookDTO> livrosDTOToLivros(List<Book> book);
+    @Mapping(source = "category", target = "category")
+    List<BookRequestDTO> livrosDTOToLivros(List<Book> book);
 
-    Book livroToDTO(BookDTO bookDTO);
+    @Mapping(source = "category", target = "category")
+    Book livroToDTO(BookResponseDTO bookResponseDTO);
+
+    @Mapping(source = "category", target = "category")
+    BookRequestDTO livroRequestDTOToLivro(Book book);
 }

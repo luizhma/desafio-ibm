@@ -2,7 +2,6 @@ package com.api.desafio.livros.service;
 
 import com.api.desafio.livros.model.Category;
 import com.api.desafio.livros.repository.CategoryRepository;
-import com.api.desafio.livros.repository.BookRepository;
 import com.api.desafio.livros.service.exceptions.DataIntegrityException;
 import com.api.desafio.livros.service.exceptions.ObjectNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +20,6 @@ public class CategoryService {
 
 
     private final CategoryRepository categoryRepository;
-    private final BookRepository bookRepository;
 
     public Category findById(Long id) {
         Optional<Category> category = categoryRepository.findById(id);
@@ -35,10 +33,11 @@ public class CategoryService {
 
     @Transactional
     public Category save(Category category) {
-        return categoryRepository.save(category);
+        Category categorySaved = categoryRepository.save(category);
+        return categorySaved;
     }
 
-    public List<Category> listAll() {
+    public List<Category> findAll() {
         return categoryRepository.findAll();
     }
 
