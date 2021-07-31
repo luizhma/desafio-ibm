@@ -15,5 +15,6 @@ public class AuthorDTO {
     private String name;
     private String nationality;
     private String biography;
+    private LocalDate birthDate;
 
 }

@@ -9,12 +9,15 @@ import lombok.NoArgsConstructor;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -40,8 +43,12 @@ public class Author {
     @Column(length = 60, nullable = false, unique = false)
     private String biography;
 
+    @Column(columnDefinition = "DATE")
+    private LocalDate birthDate;
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "author")
-    private List<Livro> livros;
+
+    @OneToMany
+    @JoinColumn(name = "AUTHOR_ID")
+    private List<Book> book = new ArrayList<>();
 
 }

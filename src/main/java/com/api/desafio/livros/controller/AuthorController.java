@@ -38,8 +38,8 @@ public class AuthorController {
         return authorMapper.dtoToEntity(authorService.findById(id));
     }
 
-    @PostMapping("/insert")
-    public Author insert(@Valid @RequestBody AuthorDTO authorDTO) {
+    @PostMapping("/")
+    public Author save(@Valid @RequestBody AuthorDTO authorDTO) {
         return authorService.save(authorMapper.entityToDTO(authorDTO));
     }
 
@@ -49,7 +49,7 @@ public class AuthorController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/update")
+    @PutMapping("/")
     public ResponseEntity<Author> update(@Valid @RequestBody AuthorDTO authorDTO) {
         authorService.update(authorMapper.entityToDTO(authorDTO));
         return ResponseEntity.noContent().build();
