@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -16,4 +17,6 @@ public class CategoryDTO {
     @NotEmpty(message = "Campo NOME é requerido")
     @Length(min = 3, max = 100 , message = "O campo NOME deve ter entre 3 e 100 caracteres")
     private String name;
+
+    private List<BookDTO> books;
 }

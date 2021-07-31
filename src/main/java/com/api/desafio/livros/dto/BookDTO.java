@@ -26,4 +26,5 @@ public class BookDTO {
 	@ApiModelProperty(value = "Classificação do livro")
     private Double classificacao;
 
+	private CategoryDTO categoryDTO;
 }
