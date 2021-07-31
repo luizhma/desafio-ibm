@@ -37,7 +37,7 @@ public class CategoryService {
         return categorySaved;
     }
 
-    public List<Category> listAll() {
+    public List<Category> findAll() {
         return categoryRepository.findAll();
     }
 

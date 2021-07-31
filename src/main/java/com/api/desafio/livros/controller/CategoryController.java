@@ -15,23 +15,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/categories")
 public class CategoryController {
 
     @Autowired
-    private CategoryService categoryService;
+    CategoryService categoryService;
 
     @Autowired
     CategoryMapper categoryMapper;
 
-    @GetMapping
+    @GetMapping("/categories")
     @ApiOperation(value = "Retorna uma lista de categorias")
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Algum problema na requisição"),
@@ -40,10 +38,10 @@ public class CategoryController {
             @ApiResponse(code = 500, message = "Foi gerada uma exceção de sistema"),
     })
     public List<CategoryDTO> list(){
-        return categoryMapper.dtosToEntity(categoryService.listAll());
+        return categoryMapper.dtosToEntity(categoryService.findAll());
     }
 
-    @GetMapping(path = "/{id}")
+    @GetMapping("/category/{id}")
     @ApiOperation(value = "Buscar categoria por id")
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Algum problema na requisição"),
@@ -54,6 +52,7 @@ public class CategoryController {
     public CategoryDTO findById(@PathVariable Long id){
         return categoryMapper.dtoToEntity(categoryService.findById(id));
     }
+    @PostMapping("/category")
     @ApiOperation(value = "Adiciona uma Categoria")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Categoria Cadastrada"),
@@ -61,7 +60,6 @@ public class CategoryController {
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção de sistema"),
     })
-    @PostMapping("/insert")
     public Category insert(@Valid @RequestBody CategoryDTO categoryDTO) {
         return   categoryService.save(categoryMapper.entityToDto(categoryDTO));
     }
@@ -73,11 +71,12 @@ public class CategoryController {
             @ApiResponse(code = 404, message = "Categoria não existe"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção de sistema"),
     })
-    @DeleteMapping(path = "/{id}")
+    @DeleteMapping(path = "/category/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
         categoryService.delete(id);
         return ResponseEntity.noContent().build();
     }
+    @PutMapping(path = "/category")
     @ApiOperation(value = "Atualiza uma Categoria")
     @ApiResponses(value = {
             @ApiResponse(code = 204, message = "Solicitação bem sucedida"),
@@ -86,7 +85,6 @@ public class CategoryController {
             @ApiResponse(code = 404, message = "Categoria não existe"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção de sistema"),
     })
-    @PutMapping(path = "/update")
     public ResponseEntity<Category> update(@Valid @RequestBody CategoryDTO categoryDTO){
         categoryService.update(categoryMapper.entityToDto(categoryDTO));
         return ResponseEntity.noContent().build();
