@@ -36,9 +36,8 @@ public class BookService {
 
     @Transactional
     public Book save(Book book){
-        Book bookSaved = bookRepository.save(book);
-        bookSaved.getCategory().getName();
-        return bookSaved;
+        bookRepository.save(book);
+        return book;
     }
 
     public Book update(Book book){

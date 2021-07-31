@@ -1,5 +1,6 @@
 package com.api.desafio.livros.controller;
 
+import com.api.desafio.livros.dto.bookRequestDTO.BookRequestDTO;
 import com.api.desafio.livros.dto.bookResponseDTO.BookResponseDTO;
 import com.api.desafio.livros.mapper.BookMapper;
 import com.api.desafio.livros.model.Book;
@@ -27,13 +28,13 @@ public class BookController {
     BookMapper bookMapper;
 
     @GetMapping ("/books")
-    public List<BookResponseDTO> list(){
+    public List<BookRequestDTO> list(){
         return bookMapper.livrosDTOToLivros(bookService.findAll());
     }
 
     @GetMapping("/book/{id}")
-    public BookResponseDTO findById(@PathVariable Long id){
-        return bookMapper.livroDTOToLivro(bookService.findById(id));
+    public BookRequestDTO findById(@PathVariable Long id){
+        return bookMapper.livroRequestDTOToLivro(bookService.findById(id));
     }
 
     @PostMapping("/book")
