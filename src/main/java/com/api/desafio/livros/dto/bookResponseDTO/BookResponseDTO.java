@@ -1,16 +1,12 @@
 package com.api.desafio.livros.dto.bookResponseDTO;
 
 import com.api.desafio.livros.dto.AuthorDTO;
-import com.api.desafio.livros.dto.CategoryDTO;
-import lombok.*;
-import org.hibernate.validator.constraints.Length;
+import com.api.desafio.livros.dto.categoryResponseDTO.CategoryResponseDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
-import javax.validation.constraints.NotEmpty;
 
 @ApiModel(value = "Objeto que representa um Livro")
 @NoArgsConstructor
@@ -28,6 +24,6 @@ public class BookResponseDTO {
     private Integer estoque;
 	@ApiModelProperty(value = "Classificação do livro")
     private Double classificacao;
-    private CategoryDTO category;
+    private CategoryResponseDTO category;
     private AuthorDTO author;
 }

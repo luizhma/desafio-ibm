@@ -1,7 +1,7 @@
 package com.api.desafio.livros.dto.bookRequestDTO;
 
 import com.api.desafio.livros.dto.AuthorDTO;
-import com.api.desafio.livros.dto.CategoryDTO;
+import com.api.desafio.livros.dto.categoryResponseDTO.CategoryResponseDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,6 +15,6 @@ public class BookRequestDTO {
     private String descricao;
     private Integer estoque;
     private Double classificacao;
-    private CategoryDTO category;
+    private CategoryResponseDTO category;
     private AuthorDTO author;
 }
