@@ -49,6 +49,5 @@ public class Book implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_author")
     private Author author;
-
  */
 }
