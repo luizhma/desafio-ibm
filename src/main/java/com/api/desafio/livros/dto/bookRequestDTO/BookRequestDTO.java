@@ -1,7 +1,7 @@
 package com.api.desafio.livros.dto.bookRequestDTO;
 
 import com.api.desafio.livros.dto.AuthorDTO;
-import com.api.desafio.livros.dto.CategoryDTO;
+import com.api.desafio.livros.dto.categoryResponseDTO.CategoryResponseDTO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,7 +22,7 @@ public class BookRequestDTO {
     @ApiModelProperty(value = "Classificacao do livro")
     private Double classificacao;
     @ApiModelProperty(value = "Categoria do livro")
-    private CategoryDTO category;
+    private CategoryResponseDTO category;
     @ApiModelProperty(value = "Autor do livro")
     private AuthorDTO author;
 }

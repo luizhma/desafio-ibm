@@ -1,6 +1,7 @@
 package com.api.desafio.livros.controller;
 
-import com.api.desafio.livros.dto.CategoryDTO;
+import com.api.desafio.livros.dto.categoryRequestDTO.CategoryRequestDTO;
+import com.api.desafio.livros.dto.categoryResponseDTO.CategoryResponseDTO;
 import com.api.desafio.livros.mapper.CategoryMapper;
 import com.api.desafio.livros.model.Category;
 import com.api.desafio.livros.service.CategoryService;
@@ -37,8 +38,8 @@ public class CategoryController {
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção de sistema"),
     })
-    public List<CategoryDTO> list(){
-        return categoryMapper.dtosToEntity(categoryService.findAll());
+    public List<CategoryRequestDTO> list(){
+        return categoryMapper.categoriesRequestDTOToCategories(categoryService.findAll());
     }
 
     @GetMapping("/category/{id}")
@@ -49,7 +50,7 @@ public class CategoryController {
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção de sistema"),
     })
-    public CategoryDTO findById(@PathVariable Long id){
+    public CategoryResponseDTO findById(@PathVariable Long id){
         return categoryMapper.dtoToEntity(categoryService.findById(id));
     }
     @PostMapping("/category")
@@ -60,9 +61,10 @@ public class CategoryController {
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção de sistema"),
     })
-    public Category insert(@Valid @RequestBody CategoryDTO categoryDTO) {
-        return   categoryService.save(categoryMapper.entityToDto(categoryDTO));
+    public Category insert(@Valid @RequestBody CategoryResponseDTO categoryResponseDTO) {
+        return   categoryService.save(categoryMapper.entityToDto(categoryResponseDTO));
     }
+    @DeleteMapping(path = "/category/{id}")
     @ApiOperation(value = "Deleta uma Categoria")
     @ApiResponses(value = {
             @ApiResponse(code = 204, message = "Solicitação bem sucedida"),
@@ -71,7 +73,6 @@ public class CategoryController {
             @ApiResponse(code = 404, message = "Categoria não existe"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção de sistema"),
     })
-    @DeleteMapping(path = "/category/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
         categoryService.delete(id);
         return ResponseEntity.noContent().build();
@@ -85,8 +86,8 @@ public class CategoryController {
             @ApiResponse(code = 404, message = "Categoria não existe"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção de sistema"),
     })
-    public ResponseEntity<Category> update(@Valid @RequestBody CategoryDTO categoryDTO){
-        categoryService.update(categoryMapper.entityToDto(categoryDTO));
+    public ResponseEntity<Category> update(@Valid @RequestBody CategoryResponseDTO categoryResponseDTO){
+        categoryService.update(categoryMapper.entityToDto(categoryResponseDTO));
         return ResponseEntity.noContent().build();
     }
 
