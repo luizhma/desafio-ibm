@@ -25,7 +25,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "tb_author")
-public class Author implements Serializable {
+public class Author {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "native")
@@ -46,6 +46,6 @@ public class Author implements Serializable {
 
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "author")
-    private List<Livro> livros;
+    private List<Book> books;
 
 }

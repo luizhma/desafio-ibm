@@ -1,11 +1,11 @@
 package com.api.desafio.livros.service;
 
 import com.api.desafio.livros.model.Category;
-import com.api.desafio.livros.repository.CategoryRepository;
 import com.api.desafio.livros.repository.BookRepository;
+import com.api.desafio.livros.repository.CategoryRepository;
 import com.api.desafio.livros.service.exceptions.DataIntegrityException;
 import com.api.desafio.livros.service.exceptions.ObjectNotFoundException;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -16,31 +16,34 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class CategoryService {
 
+    @Autowired
+    CategoryRepository categoryRepository;
 
-    private final CategoryRepository categoryRepository;
-    private final BookRepository bookRepository;
+    @Autowired
+    BookRepository bookRepository;
+
+    public List<Category> findAll() {
+        return categoryRepository.findAll();
+    }
 
     public Category findById(Long id) {
         Optional<Category> category = categoryRepository.findById(id);
-        if (!category.isPresent()){
+        if (!category.isPresent()) {
             throw new ObjectNotFoundException(
                     "Objeto não encontrato! ID: " + id + ", Tipo: " + Category.class.getName());
         }
-       return category.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Not Found"));
+        return category.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Not Found"));
     }
 
 
     @Transactional
     public Category save(Category category) {
-        return categoryRepository.save(category);
+        Category categorySaved = categoryRepository.save(category);
+        return categorySaved;
     }
 
-    public List<Category> listAll() {
-        return categoryRepository.findAll();
-    }
 
     @Transactional
     public Category update(Category obj) {
