@@ -1,7 +1,6 @@
 package com.api.desafio.livros.service;
 
 import com.api.desafio.livros.model.Category;
-import com.api.desafio.livros.repository.BookRepository;
 import com.api.desafio.livros.repository.CategoryRepository;
 import com.api.desafio.livros.service.exceptions.DataIntegrityException;
 import com.api.desafio.livros.service.exceptions.ObjectNotFoundException;
@@ -22,7 +21,7 @@ public class CategoryService {
     CategoryRepository categoryRepository;
 
     @Autowired
-    BookRepository bookRepository;
+    BookService bookService;
 
     public List<Category> findAll() {
         return categoryRepository.findAll();

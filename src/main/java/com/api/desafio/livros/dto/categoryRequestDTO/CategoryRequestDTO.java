@@ -12,6 +12,9 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class CategoryRequestDTO implements Serializable {
 
+    @ApiModelProperty(value = "ID da Categoria")
+    private Long id;
+
     @ApiModelProperty(value = "Nome da Categoria")
     private String name;
 

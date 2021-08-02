@@ -22,7 +22,7 @@ public interface BookMapper {
     BookResponsePutDTO livroDTOToLivro(Book book);
 
     @Mapping(source = "category", target = "category")
-    Book livroResponsePostDTOToLivro(BookResponsePostDTO BookResponsePostDTO);
+    Book livroResponsePostDTOToLivro(BookResponsePostDTO bookResponsePostDTO);
 
     /*  @Mapping(source = "author", target = "author") */
     @Mapping(source = "category", target = "category")
