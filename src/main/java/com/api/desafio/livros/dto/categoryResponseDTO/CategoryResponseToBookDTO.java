@@ -1,4 +1,4 @@
-package com.api.desafio.livros.dto.categoryRequestDTO;
+package com.api.desafio.livros.dto.categoryResponseDTO;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -8,14 +8,9 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class CategoryRequestDTO implements Serializable {
-
+@NoArgsConstructor
+public class CategoryResponseToBookDTO implements Serializable {
     @ApiModelProperty(value = "ID da Categoria")
     private Long id;
-
-    @ApiModelProperty(value = "Nome da Categoria")
-    private String name;
-
 }

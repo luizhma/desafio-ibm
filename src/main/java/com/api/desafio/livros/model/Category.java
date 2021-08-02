@@ -17,7 +17,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -40,7 +39,7 @@ public class Category implements Serializable {
 
     @OneToMany(mappedBy = "category")
     @JsonIgnore
-    private List<Book> books = new ArrayList<>();
+    private List<Book> books;
 
 
 

@@ -4,6 +4,7 @@ import com.api.desafio.livros.dto.categoryRequestDTO.CategoryRequestDTO;
 import com.api.desafio.livros.dto.categoryResponseDTO.CategoryResponseDTO;
 import com.api.desafio.livros.model.Category;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
@@ -13,12 +14,15 @@ public interface CategoryMapper {
 
     CategoryMapper INSTANCE = Mappers.getMapper(CategoryMapper.class);
 
-    CategoryResponseDTO dtoToEntity(Category category);
+    CategoryResponseDTO categoryResponseDTOToEntity(Category category);
 
-    Category entityToDto(CategoryResponseDTO categoryResponseDTO);
+    Category categoryToDTO(CategoryResponseDTO categoryResponseDTO);
+
+    Category categoryToCategoryRequestDTO(CategoryRequestDTO categoryRequestDTO);
 
     CategoryRequestDTO categoryRequestDTOToCategory(Category category);
 
+    @Mapping(target = "id", ignore = true)
     List<CategoryRequestDTO> categoriesRequestDTOToCategories(List<Category> category);
 
 }
