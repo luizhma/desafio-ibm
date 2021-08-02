@@ -14,19 +14,19 @@ public interface BookMapper {
 
     BookMapper INSTANCE = Mappers.getMapper(BookMapper.class);
 
+    /*@Mapping(source = "author", target = "author") */
     @Mapping(source = "category", target = "category")
-    @Mapping(source = "author", target = "author")
     BookResponseDTO livroDTOToLivro(Book book);
 
+    /*  @Mapping(source = "author", target = "author") */
     @Mapping(source = "category", target = "category")
-    @Mapping(source = "author", target = "author")
     List<BookRequestDTO> livrosDTOToLivros(List<Book> book);
 
+    /*@Mapping(source = "author", target = "author") */
     @Mapping(source = "category", target = "category")
-    @Mapping(source = "author", target = "author")
     Book livroToDTO(BookResponseDTO bookResponseDTO);
 
+    /* @Mapping(source = "author", target = "author") */
     @Mapping(source = "category", target = "category")
-    @Mapping(source = "author", target = "author")
     BookRequestDTO livroRequestDTOToLivro(Book book);
 }

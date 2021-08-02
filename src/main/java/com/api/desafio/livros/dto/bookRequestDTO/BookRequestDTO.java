@@ -23,6 +23,8 @@ public class BookRequestDTO {
     private Double classificacao;
     @ApiModelProperty(value = "Categoria do livro")
     private CategoryResponseDTO category;
-    @ApiModelProperty(value = "Autor do livro")
+  /*  @ApiModelProperty(value = "Autor do livro")
     private AuthorDTO author;
+
+   */
 }

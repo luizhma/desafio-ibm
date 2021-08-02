@@ -6,8 +6,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 
 @Data
@@ -32,7 +36,8 @@ public class Author {
     @Column(length = 60, nullable = false, unique = false)
     private String biography;
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "author")
-    private List<Book> books;
+
+ /*   @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "author")
+    private List<Book> books;*/
 
 }

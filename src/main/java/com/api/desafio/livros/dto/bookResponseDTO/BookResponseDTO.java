@@ -24,6 +24,10 @@ public class BookResponseDTO {
     private Integer estoque;
 	@ApiModelProperty(value = "Classificação do livro")
     private Double classificacao;
+    @ApiModelProperty(value = "Categoria do livro")
     private CategoryResponseDTO category;
+    /*
     private AuthorDTO author;
+
+     */
 }
