@@ -2,7 +2,8 @@ package com.api.desafio.livros.mapper;
 
 import com.api.desafio.livros.dto.CustomersDTO;
 import com.api.desafio.livros.dto.bookRequestDTO.BookRequestDTO;
-import com.api.desafio.livros.dto.bookResponseDTO.BookResponseDTO;
+import com.api.desafio.livros.dto.bookResponseDTO.BookResponsePutDTO;
+import com.api.desafio.livros.dto.bookResponseDTO.BookResponsePostDTO;
 import com.api.desafio.livros.model.Book;
 import com.api.desafio.livros.model.Customer;
 import org.mapstruct.Mapper;
@@ -18,7 +19,10 @@ public interface BookMapper {
 
     /*@Mapping(source = "author", target = "author") */
     @Mapping(source = "category", target = "category")
-    BookResponseDTO livroDTOToLivro(Book book);
+    BookResponsePutDTO livroDTOToLivro(Book book);
+
+    @Mapping(source = "category", target = "category")
+    Book livroResponsePostDTOToLivro(BookResponsePostDTO BookResponsePostDTO);
 
     /*  @Mapping(source = "author", target = "author") */
     @Mapping(source = "category", target = "category")
@@ -26,7 +30,7 @@ public interface BookMapper {
 
     /*@Mapping(source = "author", target = "author") */
     @Mapping(source = "category", target = "category")
-    Book livroToDTO(BookResponseDTO bookResponseDTO);
+    Book livroToDTO(BookResponsePutDTO bookResponsePutDTO);
 
     /* @Mapping(source = "author", target = "author") */
     @Mapping(source = "category", target = "category")

@@ -12,7 +12,7 @@ import io.swagger.annotations.ApiModelProperty;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class BookResponseGetDTO {
+public class BookResponsePutDTO {
     private Long id;
 	@ApiModelProperty(value = "Identificador universal do livro")
     private String sbn;

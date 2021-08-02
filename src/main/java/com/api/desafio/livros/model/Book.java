@@ -37,7 +37,7 @@ public class Book implements Serializable {
     private Double classificacao;
 
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_category")
     private Category category;
 /*
