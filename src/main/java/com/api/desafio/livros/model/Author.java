@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -24,7 +25,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "tb_author")
-public class Author {
+public class Author implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "native")
@@ -39,6 +40,9 @@ public class Author {
 
     @Column(length = 60, nullable = false, unique = false)
     private String biography;
+
+    @Column(unique = false)
+    private LocalDate birthdate;
 
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "author")

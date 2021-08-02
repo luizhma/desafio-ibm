@@ -4,6 +4,9 @@ import com.api.desafio.livros.dto.AuthorDTO;
 import com.api.desafio.livros.mapper.AuthorMapper;
 import com.api.desafio.livros.model.Author;
 import com.api.desafio.livros.service.AuthorService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,14 +15,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/author")
 public class AuthorController {
 
     @Autowired
@@ -28,7 +29,13 @@ public class AuthorController {
     @Autowired
     private AuthorMapper authorMapper;
 
-    @GetMapping
+    @GetMapping ("/author")
+    @ApiOperation(value = "Retorna uma lista de autor")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Retorna uma lista de autor"),
+            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+            @ApiResponse(code = 500, message = "Foi gerada uma exceção de sistema"),
+    })
     public List<AuthorDTO> list() {
         return authorMapper.dtoToEntity(authorService.list());
     }
@@ -38,7 +45,8 @@ public class AuthorController {
         return authorMapper.dtoToEntity(authorService.findById(id));
     }
 
-    @PostMapping("/insert")
+
+    @PostMapping("/author")
     public Author insert(@Valid @RequestBody AuthorDTO authorDTO) {
         return authorService.save(authorMapper.entityToDTO(authorDTO));
     }

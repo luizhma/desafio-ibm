@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,5 +16,8 @@ public class AuthorDTO {
     private String name;
     private String nationality;
     private String biography;
+
+    private LocalDate birthdate;
+
 
 }
