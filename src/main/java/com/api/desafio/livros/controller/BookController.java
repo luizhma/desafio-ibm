@@ -1,10 +1,14 @@
 package com.api.desafio.livros.controller;
 
+import com.api.desafio.livros.dto.CustomersDTO;
 import com.api.desafio.livros.dto.bookResponseDTO.BookResponseDTO;
 import com.api.desafio.livros.dto.bookRequestDTO.BookRequestDTO;
 import com.api.desafio.livros.mapper.BookMapper;
 import com.api.desafio.livros.model.Book;
+import com.api.desafio.livros.model.Customers;
+import com.api.desafio.livros.model.CustomersList;
 import com.api.desafio.livros.service.BookService;
+import com.api.desafio.livros.service.CustomerService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -29,6 +33,9 @@ public class BookController {
 
     @Autowired
     BookMapper bookMapper;
+
+    @Autowired
+    CustomerService customerService;
 
     @GetMapping ("/books")
     @ApiOperation(value = "Lista todos os livros")
@@ -93,6 +100,11 @@ public class BookController {
        BookResponseDTO bookResponseDTO = bookMapper.livroDTOToLivro(bookService.findById(id));
        bookService.delete(bookResponseDTO.getId());
        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/customers")
+    public List<CustomersDTO> listCustomers(){
+        return bookMapper.customersDTOToCustomers(customerService.obterCustomers());
     }
 
 

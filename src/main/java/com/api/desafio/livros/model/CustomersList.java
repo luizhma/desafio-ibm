@@ -4,12 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Customers {
-    private Long id;
-    private String name;
-    private String city;
-    private Integer age;
+public class CustomersList {
+
+    private List<Customers> customers;
 }
