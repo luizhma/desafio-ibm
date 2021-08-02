@@ -1,7 +1,7 @@
 package com.api.desafio.livros.dto.bookResponseDTO;
 
-import com.api.desafio.livros.dto.AuthorDTO;
-import com.api.desafio.livros.dto.categoryResponseDTO.CategoryResponseDTO;
+import com.api.desafio.livros.dto.categoryResponseDTO.CategoryResponseToBookDTO;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,7 +12,7 @@ import io.swagger.annotations.ApiModelProperty;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class BookResponseDTO {
+public class BookResponseGetDTO {
     private Long id;
 	@ApiModelProperty(value = "Identificador universal do livro")
     private String sbn;
@@ -25,9 +25,5 @@ public class BookResponseDTO {
 	@ApiModelProperty(value = "Classificação do livro")
     private Double classificacao;
     @ApiModelProperty(value = "Categoria do livro")
-    private CategoryResponseDTO category;
-    /*
-    private AuthorDTO author;
-
-     */
+    private CategoryResponseToBookDTO category;
 }
