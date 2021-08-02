@@ -1,6 +1,5 @@
 package com.api.desafio.livros.controller;
 
-import com.api.desafio.livros.controller.exception.RecordNotFoundExcpetion;
 import com.api.desafio.livros.dto.AuthorDTO;
 import com.api.desafio.livros.mapper.AuthorMapper;
 import com.api.desafio.livros.model.Author;
@@ -18,12 +17,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class AuthorController {
