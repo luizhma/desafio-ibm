@@ -1,10 +1,13 @@
 package com.api.desafio.livros.controller;
 
-import com.api.desafio.livros.dto.bookResponseDTO.BookResponseDTO;
+import com.api.desafio.livros.dto.CustomersDTO;
+import com.api.desafio.livros.dto.bookResponseDTO.BookResponsePutDTO;
 import com.api.desafio.livros.dto.bookRequestDTO.BookRequestDTO;
+import com.api.desafio.livros.dto.bookResponseDTO.BookResponsePostDTO;
 import com.api.desafio.livros.mapper.BookMapper;
 import com.api.desafio.livros.model.Book;
 import com.api.desafio.livros.service.BookService;
+import com.api.desafio.livros.service.CustomerService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -29,6 +32,9 @@ public class BookController {
 
     @Autowired
     BookMapper bookMapper;
+
+    @Autowired
+    CustomerService customerService;
 
     @GetMapping ("/books")
     @ApiOperation(value = "Lista todos os livros")
@@ -62,8 +68,8 @@ public class BookController {
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção de sistema"),
     })
-    public Book insert(@Valid @RequestBody BookResponseDTO bookResponseDTO){
-        return bookService.save(bookMapper.livroToDTO(bookResponseDTO));
+    public Book insert(@Valid @RequestBody BookResponsePostDTO bookResponsePostDTO){
+        return bookService.save(bookMapper.livroResponsePostDTOToLivro(bookResponsePostDTO));
     }
 
     @PutMapping("/book")
@@ -75,8 +81,8 @@ public class BookController {
             @ApiResponse(code = 404, message = "livro não existe"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção de sistema"),
     })
-    public ResponseEntity<Book> update(@Valid @RequestBody BookResponseDTO bookResponseDTO){
-        bookService.update(bookMapper.livroToDTO(bookResponseDTO));
+    public ResponseEntity<Book> update(@Valid @RequestBody BookResponsePutDTO bookResponsePutDTO){
+        bookService.update(bookMapper.livroToDTO(bookResponsePutDTO));
         return ResponseEntity.noContent().build();
     }
 
@@ -90,9 +96,14 @@ public class BookController {
             @ApiResponse(code = 500, message = "Foi gerada uma exceção de sistema"),
     })
     public ResponseEntity<Void> delete(@PathVariable Long id){
-       BookResponseDTO bookResponseDTO = bookMapper.livroDTOToLivro(bookService.findById(id));
-       bookService.delete(bookResponseDTO.getId());
+       BookResponsePutDTO bookResponsePutDTO = bookMapper.livroDTOToLivro(bookService.findById(id));
+       bookService.delete(bookResponsePutDTO.getId());
        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/customers")
+    public List<CustomersDTO> listCustomers(){
+        return bookMapper.customersDTOToCustomers(customerService.obterCustomers());
     }
 
 
