@@ -12,15 +12,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
+import java.time.LocalDate;
 
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+@Entity(name = "author")
 @Table(name = "tb_author")
-public class Author {
+public class Author implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "native")
@@ -36,8 +38,14 @@ public class Author {
     @Column(length = 60, nullable = false, unique = false)
     private String biography;
 
+    @Column(unique = false)
+    private LocalDate birthdate;
 
- /*   @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "author")
-    private List<Book> books;*/
+//    @OneToMany(mappedBy = "author", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+//    @Column(name = "book")
+//    private List<Book> bookList = new ArrayList<>();
+
+
+
 
 }
