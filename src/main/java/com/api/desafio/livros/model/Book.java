@@ -11,6 +11,7 @@ import org.hibernate.validator.constraints.Range;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import java.io.Serializable;
 
 @Entity
@@ -24,9 +25,9 @@ public class Book implements Serializable {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
-    @NotEmpty (message = "Campo SBN é obrigatório!")
+    @NotNull(message = "Campo SBN é obrigatório!")
     private String sbn;
-    @NotEmpty(message = "Campo NOME é requerido")
+    @NotNull(message = "Campo NOME é requerido")
     private String nome;
     @Length (max = 150, message = "Max 150 caracteres")
     @NotEmpty (message = "Campo Descrição é obrigatório!")
@@ -36,15 +37,16 @@ public class Book implements Serializable {
     @NotNull (message = "Campo Classificação é obrigatório!")
     private Double classificacao;
 
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_category")
+    @NotNull (message = "O campo categoria é obrigatório!")
     private Category category;
-
+/*
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_author")
     private Author author;
 
     public Book(long l, String s, String nomeTeste, String descricaoTeste, int i, double v, Category category) {
     }
+ */
 }
