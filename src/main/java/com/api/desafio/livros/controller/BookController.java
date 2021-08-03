@@ -103,7 +103,7 @@ public class BookController {
 
     @GetMapping("/customers")
     public List<CustomersDTO> listCustomers(){
-        return bookMapper.customersDTOToCustomers(customerService.obterCustomers());
+        return bookMapper.customersDTOToCustomers(customerService.findAll());
     }
 
 

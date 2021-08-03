@@ -1,5 +1,6 @@
 package com.api.desafio.livros.controller.exception;
 
+import com.api.desafio.livros.service.exceptions.ConstraintException;
 import com.api.desafio.livros.service.exceptions.DataIntegrityException;
 import com.api.desafio.livros.service.exceptions.ObjectNotFoundException;
 import org.hibernate.exception.ConstraintViolationException;
@@ -42,12 +43,12 @@ public class ResourceExceptionHandler {
 		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(err);
 	}
 
-	@ExceptionHandler(ConstraintViolationException.class)
+	@ExceptionHandler(ConstraintException.class)
 	public ResponseEntity<StandardError> contraintIntegrity(ConstraintViolationException e,
 			HttpServletRequest request) {
 		ValidationError err = new ValidationError(System.currentTimeMillis(), HttpStatus.UNPROCESSABLE_ENTITY.value(),
 				"Validation error", "Verifique as inconsistências observadas abaixo", request.getRequestURI());
-		err.addError("Data integrity", "alteração não permitida, itens vinculados");
+		err.addError("Data integrity", "Alteração não permitida, itens vinculados");
 		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(err);
 	}
 

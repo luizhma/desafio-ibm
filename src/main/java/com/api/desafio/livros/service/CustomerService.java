@@ -13,11 +13,10 @@ import java.util.List;
 
 @Service
 public class CustomerService {
-
     @Autowired
     private WebClient webClient;
 
-    public List<Customer> obterCustomers(){
+    public List<Customer> findAll(){
         Mono <CustomerList> customersListMono = this.webClient
                 .method(HttpMethod.GET)
                 .uri("/v3/37946fab-4b1b-447c-8d63-7d8e9ccb57e6")
@@ -36,4 +35,6 @@ public class CustomerService {
 
         return listCustomerPlus65;
     }
+
+
 }

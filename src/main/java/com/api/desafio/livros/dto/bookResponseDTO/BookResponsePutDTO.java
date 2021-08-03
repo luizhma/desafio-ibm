@@ -14,8 +14,6 @@ import io.swagger.annotations.ApiModelProperty;
 @Data
 public class BookResponsePutDTO {
     private Long id;
-	@ApiModelProperty(value = "Identificador universal do livro")
-    private String sbn;
 	@ApiModelProperty(value = "Nome do livro. Deve ter no minimo x caracteres ", required = true)
     private String nome;
 	@ApiModelProperty(value = "Descrição do livro")
