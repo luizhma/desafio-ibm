@@ -73,7 +73,7 @@ public class CategoryController {
             @ApiResponse(code = 404, message = "Categoria não existe"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção de sistema"),
     })
-    public ResponseEntity<Void> delete(@Valid @PathVariable Long id){
+    public ResponseEntity<Void> delete(@PathVariable Long id){
         categoryService.delete(id);
         return ResponseEntity.noContent().build();
     }
