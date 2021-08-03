@@ -5,10 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BookRequestDTO {
+public class BookRequestDTO implements Serializable {
     @ApiModelProperty(value = "SBN do livro")
     private String sbn;
     @ApiModelProperty(value = "Nome do livro")
@@ -19,6 +21,6 @@ public class BookRequestDTO {
     private Integer estoque;
     @ApiModelProperty(value = "Classificacao do livro")
     private Double classificacao;
-    @ApiModelProperty(value = "Categoria do livro")
+    @ApiModelProperty(value = "Categoria do livro", required = true)
     private CategoryIdDTO category;
 }

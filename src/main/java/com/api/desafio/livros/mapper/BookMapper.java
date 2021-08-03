@@ -1,10 +1,8 @@
 package com.api.desafio.livros.mapper;
 
-import com.api.desafio.livros.dto.CustomersDTO;
 import com.api.desafio.livros.dto.bookRequestDTO.BookRequestDTO;
 import com.api.desafio.livros.dto.bookResponseDTO.BookResponseDTO;
 import com.api.desafio.livros.model.Book;
-import com.api.desafio.livros.model.Customer;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -24,7 +22,6 @@ public interface BookMapper {
 
     /*  @Mapping(source = "author", target = "author") */
     @Mapping(source = "category", target = "category")
-    List<BookResponseDTO> booksResponseDTOTobooks(List<Book> book);
+    List<BookResponseDTO> booksResponseDTOToBooks(List<Book> book);
 
-    List<CustomersDTO> customersDTOToCustomers(List<Customer> customers);
 }
