@@ -73,7 +73,7 @@ public class CategoryController {
             @ApiResponse(code = 404, message = "Categoria não existe"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção de sistema"),
     })
-    public ResponseEntity<Void> delete(@PathVariable Long id){
+    public ResponseEntity<Void> delete(@Valid @PathVariable Long id){
         categoryService.delete(id);
         return ResponseEntity.noContent().build();
     }
@@ -81,7 +81,7 @@ public class CategoryController {
     @ApiOperation(value = "Atualiza uma Categoria")
     @ApiResponses(value = {
             @ApiResponse(code = 204, message = "Solicitação bem sucedida"),
-            @ApiResponse(code = 400, message = "Algum problema na requisição"),
+            @ApiResponse(code = 400, message = "Não é possível excluir uma categoria que possui livros vinculados"),
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 404, message = "Categoria não existe"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção de sistema"),

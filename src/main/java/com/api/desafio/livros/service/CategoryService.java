@@ -45,9 +45,9 @@ public class CategoryService {
 
 
     @Transactional
-    public Category update(Category obj) {
-        findById(obj.getId());
-        return categoryRepository.save(obj);
+    public Category update(Category category) {
+        findById(category.getId());
+        return categoryRepository.save(category);
     }
 
     @Transactional
