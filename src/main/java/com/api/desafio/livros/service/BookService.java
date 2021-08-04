@@ -32,7 +32,8 @@ public class BookService {
         return bookRepository.findAll();
     }
 
-    public Book findById(Long id) {
+    @Transactional
+    public Book findById(Long id){
         Optional<Book> book = bookRepository.findById(id);
         if (!book.isPresent()) {
             throw new ObjectNotFoundException(
@@ -57,16 +58,15 @@ public class BookService {
         Book bookSaved = bookRepository.save(book);
 
         return bookSaved;
-
     }
 
-    public Book update(Book book) {
-        findById(book.getId());
-        return bookRepository.save(book);
-
+    public Book update(Book book){
+       findById(book.getId());
+       return bookRepository.save(book);
     }
 
-    public void delete(Long id) {
+    @Transactional
+    public void delete(Long id){
         findById(id);
         try {
             bookRepository.deleteById(id);

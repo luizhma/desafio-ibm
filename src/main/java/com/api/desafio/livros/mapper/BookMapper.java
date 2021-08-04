@@ -15,13 +15,15 @@ public interface BookMapper {
     BookMapper INSTANCE = Mappers.getMapper(BookMapper.class);
 
     @Mapping(source = "category", target = "category")
+    @Mapping(source = "author", target = "author")
     BookResponseDTO bookResponseDTOToBook(Book book);
 
     @Mapping(source = "category", target = "category")
+    @Mapping(source = "author", target = "author")
     Book bookToBookRequestDTO(BookRequestDTO bookRequestDTO);
 
-    /*  @Mapping(source = "author", target = "author") */
     @Mapping(source = "category", target = "category")
+    @Mapping(source = "author", target = "author")
     List<BookResponseDTO> booksResponseDTOToBooks(List<Book> book);
 
 }

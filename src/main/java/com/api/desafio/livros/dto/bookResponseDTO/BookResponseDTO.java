@@ -1,5 +1,7 @@
 package com.api.desafio.livros.dto.bookResponseDTO;
 
+import com.api.desafio.livros.dto.authorResquestDTO.AuthorRequestDTO;
+import com.api.desafio.livros.dto.bookRequestDTO.CategoryIdDTO;
 import com.api.desafio.livros.dto.categoryRequestDTO.CategoryRequestDTO;
 import com.api.desafio.livros.dto.categoryResponseDTO.CategoryResponseDTO;
 import io.swagger.annotations.ApiModelProperty;
@@ -14,18 +16,20 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BookResponseDTO implements Serializable {
-    @ApiModelProperty(value = "ID do livro")
+    @ApiModelProperty(value = "Campo deve ser preenchido somente na atualização", required = true)
     private Long id;
-    @ApiModelProperty(value = "Identificador universal do livro")
+    @ApiModelProperty(value = "Campo deve ser preenchido somente na inserção", required = true)
     private String sbn;
-    @ApiModelProperty(value = "Nome do livro. Deve ter no minimo x caracteres ", required = true)
+    @ApiModelProperty(value = "Campo Nome deve ter entre 3 e 100 caracteres", required = true)
     private String nome;
-    @ApiModelProperty(value = "Descrição do livro")
+    @ApiModelProperty(value = "Campo Descricao deve ter no maximo 100 caracteres", required = true)
     private String descricao;
-    @ApiModelProperty(value = "Estoque do livro")
+    @ApiModelProperty(value = "Campo Estoque não deve ser nulo", required = true)
     private Integer estoque;
-    @ApiModelProperty(value = "Classificação do livro")
+    @ApiModelProperty(value = "Campo Classificacao deve ter o valor de 0 a 5", required = true)
     private Double classificacao;
-    @ApiModelProperty(value = "Categoria do livro")
+    @ApiModelProperty(value = "Campo categoria ID é obrigatório", required = true)
     private CategoryRequestDTO category;
+    @ApiModelProperty(value = "Campo Author ID é obrigatório", required = true)
+    private AuthorRequestDTO author;
 }
