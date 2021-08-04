@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
@@ -51,7 +52,7 @@ public class Author implements Serializable {
 
     @Column
     @JsonFormat(pattern = "yyyy-MM-dd")
-    @NotEmpty
+    @NotNull
     private LocalDate birthdate;
 
     @OneToMany(mappedBy = "author")
