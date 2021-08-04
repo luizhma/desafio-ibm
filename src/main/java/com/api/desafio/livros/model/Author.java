@@ -51,6 +51,7 @@ public class Author implements Serializable {
 
     @Column
     @JsonFormat(pattern = "yyyy-MM-dd")
+    @NotEmpty
     private LocalDate birthdate;
 
     @OneToMany(mappedBy = "author")

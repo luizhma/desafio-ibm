@@ -19,15 +19,20 @@ public class AuthorResponseDTO implements Serializable {
 
     @ApiModelProperty(value = "ID de Autor")
     private Long id;
-    @ApiModelProperty(value = "Nome do Autor")
+
+    @ApiModelProperty(value = "Nome do Autor  Max 50 caracteres", required = true)
     private String name;
-    @ApiModelProperty(value = "Nacionalidade do Autor", required = true)
+
+    @ApiModelProperty(value = "Nacionalidade do Autor  Max 50 caracteres")
     private String nationality;
-    @ApiModelProperty(value = "Briografia do Autor")
+
+    @ApiModelProperty(value = "Briografia do Autor Max 250 caracteres")
     private String biography;
+
     @ApiModelProperty(value = "Data de nascimento do Autor")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthdate;
+
     @ApiModelProperty(value = "todos os livros deste Autor")
     private Book book;
 }

@@ -13,13 +13,13 @@ public class AuthorRequestDTO implements Serializable {
 
     @ApiModelProperty(value = "ID de Autor")
     private Long id;
-    @ApiModelProperty(value = "Nome do Autor")
+    @ApiModelProperty(value = "Nome do Autor  Max 50 caracteres", required = true)
     private String name;
-    @ApiModelProperty(value = "Nacionalidade do Autor")
+    @ApiModelProperty(value = "Nacionalidade do Autor Max 50 caracteres", required = true)
     private String nationality;
-    @ApiModelProperty(value = "Biografia do Autor")
+    @ApiModelProperty(value = "Biografia do Autor Max 250 caracteres")
     private String biography;
-    @ApiModelProperty(value = "Data de nascimento de Autor")
+    @ApiModelProperty(value = "Data de nascimento de Autor", required = true)
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthdate;
 }
