@@ -1,8 +1,10 @@
 package com.api.desafio.livros.mapper;
 
-import com.api.desafio.livros.dto.AuthorDTO;
+import com.api.desafio.livros.dto.authorReponseDTO.AuthorResponseDTO;
+import com.api.desafio.livros.dto.authorResquestDTO.AuthorRequestDTO;
 import com.api.desafio.livros.model.Author;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
@@ -12,10 +14,15 @@ public interface AuthorMapper {
 
     AuthorMapper INSTANCE = Mappers.getMapper(AuthorMapper.class);
 
-    AuthorDTO dtoToEntity(Author author);
+    AuthorResponseDTO authorResponseDTOToEntity(Author author);
 
-    List<AuthorDTO> dtoToEntity(List<Author> author);
+    Author authorToDTO(AuthorResponseDTO authorResponseDTO);
 
-    Author entityToDTO(AuthorDTO authorDTO);
+    Author authorToAuthorRequestDTO(AuthorRequestDTO authorRequestDTO);
+
+    AuthorRequestDTO authorRequestDTOToAuthor(Author author);
+
+    @Mapping(target = "id", ignore = true)
+    List<AuthorRequestDTO> authorRequestDTOToAuthor(List<Author> author);
 
 }

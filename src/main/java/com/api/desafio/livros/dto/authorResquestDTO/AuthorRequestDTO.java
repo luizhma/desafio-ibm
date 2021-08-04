@@ -1,29 +1,25 @@
 package com.api.desafio.livros.dto.authorResquestDTO;
 
-import io.swagger.annotations.ApiModel;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 
 @Data
-public class AuthorRequestDTO {
+public class AuthorRequestDTO implements Serializable {
 
-
-    @ApiModelProperty(value = "NOME DO AUTOR")
+    @ApiModelProperty(value = "ID de Autor")
+    private Long id;
+    @ApiModelProperty(value = "Nome do Autor")
     private String name;
-
-    @ApiModelProperty(value = "NACIONALIDADE DO AUTOR")
+    @ApiModelProperty(value = "Nacionalidade do Autor")
     private String nationality;
-
-    @ApiModelProperty(value = "BIOGRAFIA DO AUTOR")
+    @ApiModelProperty(value = "Biografia do Autor")
     private String biography;
-
-    @ApiModelProperty(value = "DATA DE NASCIMENTO AUTOR")
+    @ApiModelProperty(value = "Data de nascimento de Autor")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthdate;
-
 }
