@@ -44,6 +44,7 @@ public class Book implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_category")
+    @NotNull (message = "Preenchimento obrigatório")
     private Category category;
 /*
     @ManyToOne(fetch = FetchType.LAZY)

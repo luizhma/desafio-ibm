@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@BookInsert
+//@BookInsert
 public class BookRequestDTO implements Serializable {
     @ApiModelProperty(value = "SBN do livro")
     private String sbn;

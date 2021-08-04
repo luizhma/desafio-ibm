@@ -9,6 +9,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.context.request.WebRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.NoSuchElementException;
@@ -43,12 +44,21 @@ public class ResourceExceptionHandler {
 
 	@ExceptionHandler(ConstraintViolationException.class)
 	public ResponseEntity<StandardError> contraintIntegrity(ConstraintViolationException e,
-			HttpServletRequest request) {
+			WebRequest request) {
 		ValidationError err = new ValidationError(System.currentTimeMillis(), HttpStatus.UNPROCESSABLE_ENTITY.value(),
-				"Validation error", "Verifique as inconsistências observadas abaixo", request.getRequestURI());
+				"Validation error", "Verifique as inconsistências observadas abaixo", "");
 		err.addError("Data integrity", "alteração não permitida, itens vinculados");
 		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(err);
 	}
+	
+	@ExceptionHandler(javax.validation.ConstraintViolationException.class)
+	public ResponseEntity<StandardError> contraintIntegrity(javax.validation.ConstraintViolationException e,
+			WebRequest request) {
+		ValidationError err = new ValidationError(System.currentTimeMillis(), HttpStatus.UNPROCESSABLE_ENTITY.value(),
+				"Validation error", "Verifique as inconsistências observadas abaixo", "");
+		err.addError("Data integrity", "alteração não permitida, itens vinculados");
+		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(err);
+	}	
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<StandardError> validation(MethodArgumentNotValidException e, HttpServletRequest request) {
