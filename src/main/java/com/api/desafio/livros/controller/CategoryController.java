@@ -53,6 +53,7 @@ public class CategoryController {
     public CategoryResponseDTO findById(@PathVariable Long id){
         return categoryMapper.categoryResponseDTOToEntity(categoryService.findById(id));
     }
+
     @PostMapping("/category")
     @ApiOperation(value = "Adiciona uma Categoria")
     @ApiResponses(value = {
