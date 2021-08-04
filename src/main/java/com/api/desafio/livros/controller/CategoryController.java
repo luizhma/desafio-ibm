@@ -62,8 +62,8 @@ public class CategoryController {
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção de sistema"),
     })
-    public Category insert(@Valid @RequestBody CategoryRequestDTO categoryRequestDTO) {
-        return   categoryService.save(categoryMapper.categoryToCategoryRequestDTO(categoryRequestDTO));
+    public Category insert(@Valid @RequestBody CategoryRequestDTO category) {
+        return   categoryService.save(categoryMapper.categoryToCategoryRequestDTO(category));
     }
     @DeleteMapping(path = "/category/{id}")
     @ApiOperation(value = "Deleta uma Categoria")
@@ -87,8 +87,8 @@ public class CategoryController {
             @ApiResponse(code = 404, message = "Categoria não existe"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção de sistema"),
     })
-    public ResponseEntity<Category> update(@Valid @RequestBody CategoryResponseDTO categoryResponseDTO){
-        categoryService.update(categoryMapper.categoryToDTO(categoryResponseDTO));
+    public ResponseEntity<Category> update(@Valid @RequestBody CategoryRequestDTO category){
+        categoryService.update(categoryMapper.categoryToCategoryRequestDTO(category));
         return ResponseEntity.noContent().build();
     }
 
