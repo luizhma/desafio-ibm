@@ -1,15 +1,16 @@
 package com.api.desafio.livros.dto.bookRequestDTO;
 
-import com.api.desafio.livros.dto.categoryResponseDTO.CategoryResponseToBookDTO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BookRequestDTO {
+public class BookRequestDTO implements Serializable {
     @ApiModelProperty(value = "SBN do livro")
     private String sbn;
     @ApiModelProperty(value = "Nome do livro")
@@ -20,10 +21,6 @@ public class BookRequestDTO {
     private Integer estoque;
     @ApiModelProperty(value = "Classificacao do livro")
     private Double classificacao;
-    @ApiModelProperty(value = "Categoria do livro")
-    private CategoryResponseToBookDTO category;
-  /*  @ApiModelProperty(value = "Autor do livro")
-    private AuthorDTO author;
-
-   */
+    @ApiModelProperty(value = "Categoria do livro", required = true)
+    private CategoryIdDTO category;
 }
