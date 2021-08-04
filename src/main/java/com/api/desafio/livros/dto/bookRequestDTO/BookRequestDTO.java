@@ -1,5 +1,6 @@
 package com.api.desafio.livros.dto.bookRequestDTO;
 
+import com.api.desafio.livros.service.validation.BookInsert;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,6 +11,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@BookInsert
 public class BookRequestDTO implements Serializable {
     @ApiModelProperty(value = "SBN do livro")
     private String sbn;

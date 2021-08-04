@@ -43,19 +43,7 @@ public class BookService {
 
     @Transactional
     public Book save(Book book) {
-        if (book.getCategory().getId() == null) {
-            throw new ObjectNotFoundException(
-                    "ID de Categoria é obrigatório ");
-        } else {
-            Optional<Category> category = categoryRepository.findById(book.getCategory().getId());
-            if (!category.isPresent()) {
-                throw new ObjectNotFoundException(
-                        "Objeto não encontrato! ID: " + book.getCategory().getId() + ", Tipo: " + Category.class.getName());
-            }
-        }
-
         Book bookSaved = bookRepository.save(book);
-
         return bookSaved;
 
     }
