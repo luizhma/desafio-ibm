@@ -1,5 +1,6 @@
 package com.api.desafio.livros.dto.bookRequestDTO;
 
+import com.api.desafio.livros.dto.categoryRequestDTO.CategoryRequestDTO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,16 +12,18 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BookRequestDTO implements Serializable {
-    @ApiModelProperty(value = "SBN do livro")
+    @ApiModelProperty(value = "Campo deve ser preenchido somente na atualização", required = true)
+    private Long id;
+    @ApiModelProperty(value = "Campo deve ser preenchido somente na inserção", required = true)
     private String sbn;
-    @ApiModelProperty(value = "Nome do livro")
+    @ApiModelProperty(value = "Campo Nome deve ter entre 3 e 100 caracteres", required = true)
     private String nome;
-    @ApiModelProperty(value = "Descricao do livro")
+    @ApiModelProperty(value = "Campo Descricao deve ter no maximo 100 caracteres", required = true)
     private String descricao;
-    @ApiModelProperty(value = "Estoque do livro")
+    @ApiModelProperty(value = "Campo Estoque não deve ser nulo", required = true)
     private Integer estoque;
-    @ApiModelProperty(value = "Classificacao do livro")
+    @ApiModelProperty(value = "Campo Classificacao deve ter o valor de 0 a 5", required = true)
     private Double classificacao;
-    @ApiModelProperty(value = "Categoria do livro", required = true)
+    @ApiModelProperty(value = "Campo categoria ID é obrigatório", required = true)
     private CategoryIdDTO category;
 }

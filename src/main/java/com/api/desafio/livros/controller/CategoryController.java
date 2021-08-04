@@ -62,7 +62,7 @@ public class CategoryController {
             @ApiResponse(code = 500, message = "Foi gerada uma exceção de sistema"),
     })
     public Category insert(@Valid @RequestBody CategoryRequestDTO categoryRequestDTO) {
-        return   categoryService.save(categoryMapper.categoryToCategoryRequestDTO(categoryRequestDTO));
+        return categoryService.save(categoryMapper.categoryToCategoryRequestDTO(categoryRequestDTO));
     }
     @DeleteMapping(path = "/category/{id}")
     @ApiOperation(value = "Deleta uma Categoria")

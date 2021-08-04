@@ -25,6 +25,7 @@ public class BookService {
        return bookRepository.findAll();
     }
 
+    @Transactional
     public Book findById(Long id){
         Optional<Book> book = bookRepository.findById(id);
         if (!book.isPresent()){
@@ -37,16 +38,15 @@ public class BookService {
     @Transactional
     public Book save(Book book){
         Book bookSaved = bookRepository.save(book);
-
         return bookSaved;
     }
 
     public Book update(Book book){
-        findById(book.getId());
-        return bookRepository.save(book);
-
+       findById(book.getId());
+       return bookRepository.save(book);
     }
 
+    @Transactional
     public void delete(Long id){
         findById(id);
         try {
