@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CategoryResponseDTO implements Serializable {
 
-    @ApiModelProperty(value = "ID da Categoria")
+    @ApiModelProperty(value = "Campo obrigatório somente na busca por Id", required = true)
     private Long id;
     @ApiModelProperty(value = "Nome da Categoria. Deve ter entre 3 e 100 caracteres", required = true)
     private String name;

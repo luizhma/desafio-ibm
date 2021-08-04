@@ -1,6 +1,6 @@
 package com.api.desafio.livros.dto.bookRequestDTO;
 
-import com.api.desafio.livros.dto.categoryRequestDTO.CategoryRequestDTO;
+
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,4 +26,6 @@ public class BookRequestDTO implements Serializable {
     private Double classificacao;
     @ApiModelProperty(value = "Campo categoria ID é obrigatório", required = true)
     private CategoryIdDTO category;
+    @ApiModelProperty(value = "Campo Author ID é obrigatório", required = true)
+    private AuthorIdDTO author;
 }

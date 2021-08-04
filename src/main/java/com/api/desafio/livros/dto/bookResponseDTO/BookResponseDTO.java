@@ -1,5 +1,6 @@
 package com.api.desafio.livros.dto.bookResponseDTO;
 
+import com.api.desafio.livros.dto.authorResquestDTO.AuthorRequestDTO;
 import com.api.desafio.livros.dto.bookRequestDTO.CategoryIdDTO;
 import com.api.desafio.livros.dto.categoryRequestDTO.CategoryRequestDTO;
 import com.api.desafio.livros.dto.categoryResponseDTO.CategoryResponseDTO;
@@ -29,4 +30,6 @@ public class BookResponseDTO implements Serializable {
     private Double classificacao;
     @ApiModelProperty(value = "Campo categoria ID é obrigatório", required = true)
     private CategoryRequestDTO category;
+    @ApiModelProperty(value = "Campo Author ID é obrigatório", required = true)
+    private AuthorRequestDTO author;
 }

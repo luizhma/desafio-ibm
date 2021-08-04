@@ -6,9 +6,7 @@ import com.api.desafio.livros.service.exceptions.DataIntegrityException;
 import com.api.desafio.livros.service.exceptions.ObjectNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
@@ -23,7 +21,6 @@ public class AuthorService {
 
     public List<Author> list() {
         return authorRepository.findAll();
-
     }
 
     public Author findById(Long id) {
@@ -34,7 +31,6 @@ public class AuthorService {
         }
         return author.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not Found"));
     }
-
 
     @Transactional
     public Author save(Author author) {
@@ -47,13 +43,7 @@ public class AuthorService {
         return authorRepository.save(author);
     }
 
-    public List<Author> findByNameContaining(@RequestParam(name = "name") String name) {
-        return authorRepository.findByNameContainingIgnoreCase(name);
-    }
 
-    public List<Author> findByNameOrBiographyContaining(@RequestParam(name = "name") String name, @RequestParam(name ="biography") String biography) {
-        return authorRepository.findByNameIgnoreCaseContainingOrBiographyIgnoreCaseContaining(name,biography);
-    }
 
     public void delete(Long id) {
         findById(id);

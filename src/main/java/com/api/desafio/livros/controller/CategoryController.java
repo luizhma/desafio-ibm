@@ -53,6 +53,7 @@ public class CategoryController {
     public CategoryResponseDTO findById(@PathVariable Long id){
         return categoryMapper.categoryResponseDTOToEntity(categoryService.findById(id));
     }
+
     @PostMapping("/category")
     @ApiOperation(value = "Adiciona uma Categoria")
     @ApiResponses(value = {
@@ -61,8 +62,8 @@ public class CategoryController {
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção de sistema"),
     })
-    public Category insert(@Valid @RequestBody CategoryRequestDTO categoryRequestDTO) {
-        return categoryService.save(categoryMapper.categoryToCategoryRequestDTO(categoryRequestDTO));
+    public Category insert(@Valid @RequestBody CategoryRequestDTO category) {
+        return   categoryService.save(categoryMapper.categoryToCategoryRequestDTO(category));
     }
     @DeleteMapping(path = "/category/{id}")
     @ApiOperation(value = "Deleta uma Categoria")
@@ -81,13 +82,13 @@ public class CategoryController {
     @ApiOperation(value = "Atualiza uma Categoria")
     @ApiResponses(value = {
             @ApiResponse(code = 204, message = "Solicitação bem sucedida"),
-            @ApiResponse(code = 400, message = "Algum problema na requisição"),
+            @ApiResponse(code = 400, message = "Não é possível excluir uma categoria que possui livros vinculados"),
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 404, message = "Categoria não existe"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção de sistema"),
     })
-    public ResponseEntity<Category> update(@Valid @RequestBody CategoryResponseDTO categoryResponseDTO){
-        categoryService.update(categoryMapper.categoryToDTO(categoryResponseDTO));
+    public ResponseEntity<Category> update(@Valid @RequestBody CategoryRequestDTO category){
+        categoryService.update(categoryMapper.categoryToCategoryRequestDTO(category));
         return ResponseEntity.noContent().build();
     }
 

@@ -12,10 +12,10 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class CategoryRequestDTO implements Serializable {
 
-    @ApiModelProperty(value = "ID da Categoria")
+    @ApiModelProperty(value = "Campo obrigatório somente na atualização", required = true)
     private Long id;
 
-    @ApiModelProperty(value = "Nome da Categoria")
+    @ApiModelProperty(value = "Nome da Categoria. Deve ter entre 3 e 100 caracteres", required = true)
     private String name;
 
 }
