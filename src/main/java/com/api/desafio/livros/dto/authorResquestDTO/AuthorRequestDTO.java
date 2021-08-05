@@ -22,4 +22,6 @@ public class AuthorRequestDTO implements Serializable {
     @ApiModelProperty(value = "Data de nascimento de Autor", required = true)
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthdate;
+
+    
 }
