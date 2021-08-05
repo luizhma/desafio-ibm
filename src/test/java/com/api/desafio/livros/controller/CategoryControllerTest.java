@@ -9,9 +9,9 @@ import com.api.desafio.livros.util.CategoryCreator;
 import com.api.desafio.livros.util.CategoryRequestDTOCreator;
 import lombok.extern.log4j.Log4j2;
 import org.assertj.core.api.Assertions;
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentMatchers;
 import org.mockito.BDDMockito;
@@ -45,10 +45,10 @@ public class CategoryControllerTest {
 
         BDDMockito.when((categoryServiceMock.save(ArgumentMatchers.any(Category.class))))
                 .thenReturn(CategoryCreator.createCategoryValidCategory());
-
+/*
         BDDMockito.doNothing().when(categoryServiceMock).update(ArgumentMatchers.any(Category.class));
 
-        BDDMockito.doNothing().when(categoryServiceMock).delete(ArgumentMatchers.anyLong());
+        BDDMockito.doNothing().when(categoryServiceMock).delete(ArgumentMatchers.anyLong());*/
 
     }
 

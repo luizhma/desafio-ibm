@@ -8,30 +8,29 @@ import com.api.desafio.livros.util.CategoryRequestDTOCreator;
 import javassist.NotFoundException;
 import lombok.extern.log4j.Log4j2;
 import org.assertj.core.api.Assertions;
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentMatchers;
 import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 
-@ExtendWith(MockitoExtension.class)
+@ExtendWith(SpringExtension.class)
 @Log4j2
-@DisplayName("Tests for Category Service")
 public class CategoryServiceTest {
 
     @InjectMocks
     private CategoryService categoryService;
 
-    @Mock
+    @MockBean
     private CategoryRepository categoryRepositoryMock;
 
 
@@ -47,9 +46,9 @@ public class CategoryServiceTest {
         BDDMockito.when((categoryRepositoryMock.save(ArgumentMatchers.any(Category.class))))
                 .thenReturn(CategoryCreator.createCategoryValidCategory());
 
-        BDDMockito.doNothing().when(categoryRepositoryMock).save(ArgumentMatchers.any(Category.class));
+    /*    BDDMockito.doNothing().doThrow(new RuntimeException()).when(categoryRepositoryMock).save(ArgumentMatchers.any(Category.class));
 
-        BDDMockito.doNothing().when(categoryRepositoryMock).deleteById(ArgumentMatchers.anyLong());
+        BDDMockito.doNothing().doThrow(new RuntimeException()).when(categoryRepositoryMock).deleteById(ArgumentMatchers.anyLong());*/
 
     }
 
