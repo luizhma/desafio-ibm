@@ -2,7 +2,7 @@ package com.api.desafio.livros.util;
 
 import com.api.desafio.livros.model.Category;
 
-public class CategoryCreator {
+public class CategoryCreator{
 
     public static Category createCategoryToBeSaved() {
         return Category.builder()
@@ -23,4 +23,5 @@ public class CategoryCreator {
                 .id(1L)
                 .build();
     }
+
 }

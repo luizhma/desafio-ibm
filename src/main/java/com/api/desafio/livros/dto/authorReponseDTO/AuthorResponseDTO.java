@@ -7,9 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Data
@@ -34,6 +34,6 @@ public class AuthorResponseDTO implements Serializable {
     private LocalDate birthdate;
 
     @ApiModelProperty(value = "todos os livros deste Autor")
-    private Book book;
+    private List<Book> books;
 }
 

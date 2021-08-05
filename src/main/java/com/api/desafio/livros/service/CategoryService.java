@@ -20,9 +20,6 @@ public class CategoryService {
     @Autowired
     CategoryRepository categoryRepository;
 
-    @Autowired
-    BookService bookService;
-
     public List<Category> findAll() {
         return categoryRepository.findAll();
     }
