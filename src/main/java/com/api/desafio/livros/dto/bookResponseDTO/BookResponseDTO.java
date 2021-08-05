@@ -1,9 +1,7 @@
 package com.api.desafio.livros.dto.bookResponseDTO;
 
 import com.api.desafio.livros.dto.authorResquestDTO.AuthorRequestDTO;
-import com.api.desafio.livros.dto.bookRequestDTO.CategoryIdDTO;
 import com.api.desafio.livros.dto.categoryRequestDTO.CategoryRequestDTO;
-import com.api.desafio.livros.dto.categoryResponseDTO.CategoryResponseDTO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;

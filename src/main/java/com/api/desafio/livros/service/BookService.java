@@ -56,7 +56,6 @@ public class BookService {
         }
 
         Book bookSaved = bookRepository.save(book);
-
         return bookSaved;
     }
 

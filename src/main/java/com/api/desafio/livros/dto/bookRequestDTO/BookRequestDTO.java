@@ -25,7 +25,7 @@ public class BookRequestDTO implements Serializable {
     @ApiModelProperty(value = "Campo Classificacao deve ter o valor de 0 a 5", required = true)
     private Double classificacao;
     @ApiModelProperty(value = "Campo categoria ID é obrigatório", required = true)
-    private CategoryIdDTO category;
+    private Long category_id;
     @ApiModelProperty(value = "Campo Author ID é obrigatório", required = true)
-    private AuthorIdDTO author;
+    private Long author_id;
 }
