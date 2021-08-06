@@ -18,12 +18,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import static com.api.desafio.livros.util.CategoryCreator.createValidUpdatedCategory;
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 
@@ -124,38 +123,30 @@ public class CategoryServiceTest {
         Category categorySaved = categoryService.save(category);
         log.info("Categoria salva {} ", categorySaved);
 
-        final Throwable exception = catchThrowable(() -> categoryService.delete(categorySaved.getId()));
-        log.info("Categoria deleteda {} ", exception);
-
-        Assertions.assertThat(exception).isNull();
-
-        verify(categoryRepositoryMock, times(1)).deleteById(anyLong());
+        Assertions.assertThatCode(() ->categoryService.delete(1L))
+                .doesNotThrowAnyException();
 
     }
-/*    @Test
+    @Test
     @DisplayName("update return  category when successful")
     void updateReturnCategorySucessfull() {
         Category category = CategoryCreator.createCategoryToBeSaved();
         log.info("Categoria criada {} ", category);
 
-        when(categoryRepositoryMock.save(any(Category.class))).thenReturn(category);
+        Category categoryToUpdate = createValidUpdatedCategory();
+
+        when(categoryRepositoryMock.save(any(Category.class))).thenReturn(categoryToUpdate);
         when(categoryRepositoryMock.findById(anyLong())).thenReturn(Optional.of(category));
 
-        Category categorySaved = categoryService.save(category);
-        log.info("Categoria salva {} ", categorySaved);
 
+        Category categoryUpdateSaved = categoryService.update(category);
+        log.info("Categoria Atualizada {} ", categoryUpdateSaved);
 
+        Assertions.assertThat(category).isNotNull();
+        Assertions.assertThat(categoryToUpdate.getId()).isNotNull();
+        Assertions.assertThat(category.getName()).isNotEqualTo(categoryUpdateSaved.getName());
 
-        final Throwable exception = catchThrowable(() -> categoryService.update(categorySaved));
-        log.info("Categoria exception {} ", exception);
-
-
-        Assertions.assertThat(exception).isNull();
-        Assertions.assertThat(categorySaved).isNotNull();
-
-
-    }*/
-
+    }
 
 
 }
