@@ -4,6 +4,7 @@ import com.api.desafio.livros.model.Category;
 import com.api.desafio.livros.repository.CategoryRepository;
 import com.api.desafio.livros.service.exceptions.DataIntegrityException;
 import com.api.desafio.livros.service.exceptions.ObjectNotFoundException;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class CategoryService {
 
     @Autowired
@@ -28,7 +30,7 @@ public class CategoryService {
         Optional<Category> category = categoryRepository.findById(id);
         if (!category.isPresent()) {
             throw new ObjectNotFoundException(
-                    "Objeto não encontrato! ID: " + id + ", Tipo: " + Category.class.getName());
+                    "Objeto não encontrado! ID: " + id + ", Tipo: " + Category.class.getName());
         }
         return category.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Not Found"));
     }
