@@ -22,7 +22,7 @@ public class AuthorRequestDTO implements Serializable {
     @ApiModelProperty(value = "Biografia do Autor Max 250 caracteres")
     private String biography;
 
-    @ApiModelProperty(value = "Data de nascimento de Autor", required = true)
+    @ApiModelProperty(value = "Data de nascimento de Autor, formato de dd-MM-yyyy", required = true)
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate birthdate;
 
