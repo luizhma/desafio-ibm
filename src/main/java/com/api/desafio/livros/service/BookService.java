@@ -37,7 +37,7 @@ public class BookService {
         Optional<Book> book = bookRepository.findById(id);
         if (!book.isPresent()) {
             throw new ObjectNotFoundException(
-                    "Objeto não encontrato! ID: " + id + ", Tipo: " + Book.class.getName());
+                    "Objeto não encontrado! ID: " + id + ", Tipo: " + Book.class.getName());
         }
         return book.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Not Found"));
     }
