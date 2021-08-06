@@ -66,6 +66,19 @@ public class AuthorController {
         return authorService.save(authorMapper.authorToAuthorRequestDTO(authorRequestDTO));
     }
 
+    @PutMapping(path = "/author")
+    @ApiOperation(value = "Atualiza um Autor")
+    @ApiResponses(value = {
+            @ApiResponse(code = 204, message = "Solicitação bem sucedida"),
+            @ApiResponse(code = 400, message = "Algum problema na requisição"),
+            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+            @ApiResponse(code = 404, message = "Autor não existe"),
+            @ApiResponse(code = 500, message = "Foi gerada uma exceção de sistema"),
+    })
+    public ResponseEntity<Author> update(@Valid @RequestBody AuthorRequestDTO authorRequestDTO) {
+        authorService.update(authorMapper.authorToAuthorRequestDTO((authorRequestDTO)));
+        return ResponseEntity.noContent().build();
+    }
 
     @DeleteMapping(path = "/author/{id}")
     @ApiOperation(value = "Deleta um Autor")
@@ -81,17 +94,5 @@ public class AuthorController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping(path = "/author")
-    @ApiOperation(value = "Atualiza um Autor")
-    @ApiResponses(value = {
-            @ApiResponse(code = 204, message = "Solicitação bem sucedida"),
-            @ApiResponse(code = 400, message = "Algum problema na requisição"),
-            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
-            @ApiResponse(code = 404, message = "Autor não existe"),
-            @ApiResponse(code = 500, message = "Foi gerada uma exceção de sistema"),
-    })
-    public ResponseEntity<Author> update(@Valid @RequestBody AuthorResponseDTO authorResponseDTO) {
-        authorService.update(authorMapper.authorToDTO((authorResponseDTO)));
-        return ResponseEntity.noContent().build();
-    }
+
 }
