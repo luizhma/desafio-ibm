@@ -43,8 +43,6 @@ public class AuthorService {
         return authorRepository.save(author);
     }
 
-
-
     public void delete(Long id) {
         findById(id);
         try {

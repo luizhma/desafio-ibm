@@ -59,7 +59,7 @@ public class AuthorServiceTest {
     }
 
     @Test
-    @DisplayName("findById returns  author when successful")
+    @DisplayName("findById returns author when successful")
     void findByIdReturnAuthorSucessfull() {
         Author author = AuthorCreator.createAuthorToBeSaved();
         log.info("Author criado {} ", author);
@@ -112,7 +112,7 @@ public class AuthorServiceTest {
     }
 
     @Test
-    @DisplayName("update return  author when successful")
+    @DisplayName("update return author when successful")
     void updateReturnauthorSucessfull() {
         Author author = AuthorCreator.createAuthorToBeSaved();
         log.info("Author criado {} ", author);
@@ -124,7 +124,7 @@ public class AuthorServiceTest {
 
 
         Author authorUpdateSaved = authorService.update(author);
-        log.info("Author atualizado Atualizada {} ", authorUpdateSaved);
+        log.info("Author atualizado {} ", authorUpdateSaved);
 
         Assertions.assertThat(author).isNotNull();
         Assertions.assertThat(authorToUpdate.getId()).isNotNull();
@@ -154,8 +154,4 @@ public class AuthorServiceTest {
         verify(authorRepositoryMock, times(1)).deleteById(anyLong());
 
     }
-
-
-
-
 }
