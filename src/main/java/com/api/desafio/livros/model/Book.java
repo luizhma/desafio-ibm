@@ -4,11 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -48,12 +46,12 @@ public class Book implements Serializable {
     @NotNull (message = "O campo Classificacao deve ter o valor de 0 a 5")
     private Double classificacao;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "id_category")
     @NotNull (message = "O campo categoria ID é obrigatório!")
     private Category category;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "id_author")
     private Author author;
 

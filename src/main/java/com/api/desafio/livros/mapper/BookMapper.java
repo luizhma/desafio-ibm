@@ -18,8 +18,8 @@ public interface BookMapper {
     @Mapping(source = "author", target = "author")
     BookResponseDTO bookResponseDTOToBook(Book book);
 
-    @Mapping(source = "category", target = "category")
-    @Mapping(source = "author", target = "author")
+    @Mapping(source = "category_id", target = "category.id")
+    @Mapping(source = "author_id", target = "author.id")
     Book bookToBookRequestDTO(BookRequestDTO bookRequestDTO);
 
     @Mapping(source = "category", target = "category")
