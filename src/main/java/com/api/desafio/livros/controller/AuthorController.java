@@ -93,6 +93,4 @@ public class AuthorController {
         authorService.delete(id);
         return ResponseEntity.noContent().build();
     }
-
-
 }
