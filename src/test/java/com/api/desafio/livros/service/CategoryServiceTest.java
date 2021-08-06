@@ -1,31 +1,34 @@
 package com.api.desafio.livros.service;
 
-import com.api.desafio.livros.dto.categoryRequestDTO.CategoryRequestDTO;
 import com.api.desafio.livros.model.Category;
 import com.api.desafio.livros.repository.CategoryRepository;
+import com.api.desafio.livros.service.exceptions.ObjectNotFoundException;
 import com.api.desafio.livros.util.CategoryCreator;
-import com.api.desafio.livros.util.CategoryRequestDTOCreator;
-import javassist.NotFoundException;
 import lombok.extern.log4j.Log4j2;
 import org.assertj.core.api.Assertions;
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentMatchers;
-import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.catchThrowable;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-@ExtendWith(MockitoExtension.class)
+
+@ExtendWith(SpringExtension.class)
 @Log4j2
-@DisplayName("Tests for Category Service")
 public class CategoryServiceTest {
 
     @InjectMocks
@@ -34,88 +37,125 @@ public class CategoryServiceTest {
     @Mock
     private CategoryRepository categoryRepositoryMock;
 
-
     @BeforeEach
-    public void setUp(){
-
-        BDDMockito.when(categoryRepositoryMock.findAll())
-                .thenReturn(Arrays.asList(CategoryCreator.createCategoryValidCategory()));
-
-        BDDMockito.when((categoryRepositoryMock.findById(ArgumentMatchers.anyLong())))
-                .thenReturn(Optional.of(CategoryCreator.createCategoryValidCategory()));
-
-        BDDMockito.when((categoryRepositoryMock.save(ArgumentMatchers.any(Category.class))))
-                .thenReturn(CategoryCreator.createCategoryValidCategory());
-
-        BDDMockito.doNothing().when(categoryRepositoryMock).save(ArgumentMatchers.any(Category.class));
-
-        BDDMockito.doNothing().when(categoryRepositoryMock).deleteById(ArgumentMatchers.anyLong());
-
+    public void setUp() {
+        categoryService = new CategoryService(categoryRepositoryMock);
     }
 
     @Test
     @DisplayName("ListAll returns list of category when successful")
-    public void listAllReturnListOfCategorySucessfull(){
-        CategoryRequestDTO expected = CategoryRequestDTOCreator.createCategoryRequestToBeValidSaved();
-        //String expectedName = CategoryCreator.createCategoryValidCategory().getName();
-        log.info("Categoria salva {}", expected.toString());
+    void listAllReturnListOfCategorySucessfull() {
+        Category category = CategoryCreator.createCategoryToBeSaved();
+        log.info("Categoria criada {} ", category);
 
-        List<Category> categoryList = categoryService.findAll();
-        log.info("Lista de categoria {}", categoryList.stream().toString());
+        when(categoryRepositoryMock.findAll()).thenReturn(Collections.singletonList(category));
+        List<Category> categoryList = categoryRepositoryMock.findAll();
 
-        Assertions.assertThat(categoryList)
-                .isNotNull()
-                .isNotEmpty()
-                .isEqualTo(expected);
+        log.info("Lista de categoria {}", categoryList.toString());
+
+        Assertions.assertThat(categoryList).hasSize(1);
 
     }
 
     @Test
     @DisplayName("findById returns  category when successful")
-    public void findByIdReturnCategorySucessfull(){
-        Long expectedID = CategoryCreator.createCategoryValidCategory().getId();
-        log.info("ID: {}", expectedID.toString());
+    void findByIdReturnCategorySucessfull() {
+        Category category = CategoryCreator.createCategoryToBeSaved();
+        log.info("Categoria criada {} ", category);
 
-        Category category = categoryService.findById(1L);
+        when(categoryRepositoryMock.findById(anyLong())).thenReturn(Optional.of(category));
 
-        Assertions.assertThat(category).isNotNull();
-        Assertions.assertThat(category.getId()).isNotNull().isEqualTo(expectedID);
+        Category categorySaved = categoryService.findById(1L);
+        log.info("Categoria encontrando {} ", categorySaved);
 
+        Assertions.assertThat(categorySaved).isNotNull();
+        Assertions.assertThat(categorySaved.getId()).isNotNull().isEqualTo(category.getId());
+        Assertions.assertThat(categorySaved.getName()).isNotNull().isEqualTo(category.getName());
 
     }
 
     @Test
-    @DisplayName("findById returns an of category when id is not found")
-    public void findByIDReturnsEmptyOfCategoryWhenIsNotFound(){
-        BDDMockito.when((categoryRepositoryMock.findById(ArgumentMatchers.anyLong())))
-                .thenReturn(Optional.of(CategoryCreator.createCategoryValidCategory()));
+    @DisplayName("findById returns an of category when id is NoutFoundException")
+    void findByIDReturnsEmptyOfCategoryWhenIsNotFoundException() {
+        Category category = CategoryCreator.createCategoryToBeSaved();
+        log.info("Categoria criada {} ", category);
+        ;
 
-        Category category = categoryService.findById(1L);
+        when(categoryRepositoryMock.findById(anyLong())).thenReturn(Optional.empty());
 
-        Assertions.assertThatExceptionOfType(NotFoundException.class)
-                .isThrownBy(() -> this.categoryRepositoryMock.save(category))
-                .withMessageContaining("Objeto não encontrato!");
+        final Throwable exception = catchThrowable(() -> categoryService.findById(1L));
+
+        Assertions.assertThat(exception)
+                .isInstanceOf(ObjectNotFoundException.class)
+                .hasMessage(String.format("Objeto não encontrado! ID: %s",
+                        category.getId() + ", Tipo: " + Category.class.getName()));
 
     }
 
 
     @Test
     @DisplayName("save returns category when successful")
-    public void saveReturnCategorySucessfull(){
+    void saveReturnCategorySucessfull() {
+        Category category = CategoryCreator.createCategoryToBeSaved();
+        log.info("Categoria criada {} ", category);
 
-        Category category = categoryService.save(CategoryCreator.createCategoryToBeSaved());
+        when(categoryRepositoryMock.save(any(Category.class))).thenReturn(category);
 
-        Assertions.assertThat(category).isNotNull().isEqualTo(CategoryCreator.createCategoryToBeSaved());
+        Category categorySaved = categoryService.save(category);
+        log.info("Categoria salva {} ", categorySaved);
+
+        Assertions.assertThat(categorySaved).isNotNull();
+        Assertions.assertThat(categorySaved.getId()).isEqualTo(category.getId());
+        Assertions.assertThat(categorySaved.getName()).isEqualTo(category.getName());
 
     }
 
     @Test
-    @DisplayName("updates category when successful")
-    public void UpdatesCategory_WhenSuccessful(){
+    @DisplayName("delete remove  category when successful")
+    void deleteRemoveCategorySucessfull() {
+        Category category = CategoryCreator.createCategoryToBeSaved();
+        log.info("Categoria criada {} ", category);
 
-        Assertions.assertThatCode(() -> categoryService.update(CategoryCreator.createValidUpdatedCategory()))
-                .doesNotThrowAnyException();
+        when(categoryRepositoryMock.save(any(Category.class))).thenReturn(category);
+        when(categoryRepositoryMock.findById(anyLong())).thenReturn(Optional.of(category));
+        doNothing().when(categoryRepositoryMock).deleteById(anyLong());
+
+
+        Category categorySaved = categoryService.save(category);
+        log.info("Categoria salva {} ", categorySaved);
+
+        final Throwable exception = catchThrowable(() -> categoryService.delete(categorySaved.getId()));
+        log.info("Categoria deleteda {} ", exception);
+
+        Assertions.assertThat(exception).isNull();
+
+        verify(categoryRepositoryMock, times(1)).deleteById(anyLong());
+
     }
+/*    @Test
+    @DisplayName("update return  category when successful")
+    void updateReturnCategorySucessfull() {
+        Category category = CategoryCreator.createCategoryToBeSaved();
+        log.info("Categoria criada {} ", category);
+
+        when(categoryRepositoryMock.save(any(Category.class))).thenReturn(category);
+        when(categoryRepositoryMock.findById(anyLong())).thenReturn(Optional.of(category));
+
+        Category categorySaved = categoryService.save(category);
+        log.info("Categoria salva {} ", categorySaved);
+
+
+
+        final Throwable exception = catchThrowable(() -> categoryService.update(categorySaved));
+        log.info("Categoria exception {} ", exception);
+
+
+        Assertions.assertThat(exception).isNull();
+        Assertions.assertThat(categorySaved).isNotNull();
+
+
+    }*/
+
 
 
 }
