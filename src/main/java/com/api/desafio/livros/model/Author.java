@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -51,8 +52,8 @@ public class Author implements Serializable {
     private String biography;
 
     @Column
-    @JsonFormat(pattern = "yyyy-MM-dd")
     @NotNull
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate birthdate;
 
     @OneToMany(mappedBy = "author")

@@ -6,7 +6,10 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.Column;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
@@ -30,7 +33,6 @@ public class AuthorResponseDTO implements Serializable {
     private String biography;
 
     @ApiModelProperty(value = "Data de nascimento do Autor")
-    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthdate;
 
     @ApiModelProperty(value = "todos os livros deste Autor")
