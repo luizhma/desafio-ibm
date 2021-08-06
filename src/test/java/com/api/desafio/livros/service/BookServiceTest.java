@@ -25,7 +25,7 @@ import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
-public class BookServiceTest {
+public class  BookServiceTest {
 
     @InjectMocks
     private BookService bookService;
