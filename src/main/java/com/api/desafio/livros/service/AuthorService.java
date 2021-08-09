@@ -27,7 +27,7 @@ public class AuthorService {
         Optional<Author> author = authorRepository.findById(id);
         if (!author.isPresent()) {
             throw new ObjectNotFoundException(
-                    "Objeto não encontrato! ID: " + id + ", Tipo: " + Author.class.getName());
+                    "Objeto não encontrado! ID: " + id + ", Tipo: " + Author.class.getName());
         }
         return author.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not Found"));
     }
@@ -42,8 +42,6 @@ public class AuthorService {
         findById(author.getId());
         return authorRepository.save(author);
     }
-
-
 
     public void delete(Long id) {
         findById(id);
