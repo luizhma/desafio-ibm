@@ -1,8 +1,11 @@
 package com.api.desafio.livros.service;
 import com.api.desafio.livros.model.Book;
+import com.api.desafio.livros.model.Category;
 import com.api.desafio.livros.repository.BookRepository;
 import com.api.desafio.livros.repository.CategoryRepository;
+import com.api.desafio.livros.service.exceptions.ObjectNotFoundException;
 import com.api.desafio.livros.util.BookCreator;
+import com.api.desafio.livros.util.CategoryCreator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,12 +18,14 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
-public class BookServiceTest {
+public class  BookServiceTest {
 
     @InjectMocks
     private BookService bookService;
@@ -30,8 +35,8 @@ public class BookServiceTest {
     private CategoryRepository categoryRepositoryMock;
 
     @Test
-    @DisplayName("FindBookById")
-    void findById(){
+    @DisplayName("findById returns book when successful")
+    void findByIdReturnBookSucessful(){
         Book bookValid = BookCreator.createValidBook();
         BDDMockito.when(bookRepositoryMock.findById(ArgumentMatchers.anyLong()))
                 .thenReturn(Optional.of(bookValid));
@@ -42,8 +47,23 @@ public class BookServiceTest {
     }
 
     @Test
-    @DisplayName("FindAllBooks")
-    void findAllBooks(){
+    @DisplayName("findById returns an of book when id is NotFoundException")
+    void findByIDReturnsEmptyOfBookWhenIsNotFoundException() {
+        Book book = BookCreator.createValidBook();
+
+        when(bookRepositoryMock.findById(anyLong())).thenReturn(Optional.empty());
+
+        final Throwable exception = catchThrowable(() -> bookService.findById(1L));
+
+        Assertions.assertThat(exception)
+                .isInstanceOf(ObjectNotFoundException.class)
+                .hasMessage(String.format("Objeto não encontrado! ID: %s",
+                        book.getId() + ", Tipo: " + Book.class.getName()));
+    }
+
+    @Test
+    @DisplayName("ListAll returns list of book when successful")
+    void listAllReturnListOfBoofSucessful(){
         Book book = BookCreator.createValidBook();
         BDDMockito.when(bookRepositoryMock.findAll())
                 .thenReturn(Collections.singletonList(book));
@@ -56,8 +76,8 @@ public class BookServiceTest {
     }
 
     @Test
-    @DisplayName("Save Books")
-    void saveAndReturnBook(){
+    @DisplayName("save returns book when successful")
+    void saveAndReturnBookSuccessful(){
         Book book = BookCreator.createValidBook();
 
         when(bookRepositoryMock.save(any(Book.class)))
@@ -74,8 +94,8 @@ public class BookServiceTest {
 
 
     @Test
-    @DisplayName("Replace Book")
-    void replaceUpdateBook(){
+    @DisplayName("update return  category when successful")
+    void updateReturnBookSucessful(){
         Book createdBook = BookCreator.createValidBook();
 
         Book updateBook = BookCreator.createValidUpdatedBook();
@@ -95,8 +115,8 @@ public class BookServiceTest {
     }
 
     @Test
-    @DisplayName("Remove Books")
-    void removeBook(){
+    @DisplayName("delete remove book when successful")
+    void deleteRemoveCategorySucessful(){
         Book createdBook = BookCreator.createValidBook();
         BDDMockito.doNothing().when(bookRepositoryMock).delete(ArgumentMatchers.any(Book.class));
 
